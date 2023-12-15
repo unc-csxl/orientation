@@ -8,7 +8,7 @@ This section contains resources relating to the frontend of the CSXL Web Applica
 
 ### TypeScript
 
-[**TypeScript for the COMP 301 Developer**]() (COMING SOON)
+[**TypeScript for the COMP 301 Developer**](https://github.com/unc-csxl/orientation/blob/main/frontend/typescript_tutorial.md)
 
 This reading introduces the TypeScript programming language for those who just concluded a Java programming course (such as COMP 210 or COMP 301). Learn more about how TypeScript compares to Java in purpose, syntax, and language features.
 
