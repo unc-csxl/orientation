@@ -15,7 +15,7 @@ In this course, we will use **TypeScript** to build out the frontend of our web 
 
 TypeScript shares some similarities to Java - both are compiled languages, both support object-oriented programming. However, there are many key differences (including their purpose, how they are compiled, etc). You will learn more about these features throughout the course. 
 
-This document is designed to help you become familiar with the syntax and features of TypeScript from the context of the Java experience you all have had in COMP 301. It compares the syntax between Java and TypeScript in various situations and should serve as a guide going into the first few weeks of the semester.
+This document is designed to help you become familiar with the syntax and features of TypeScript from the context of the Java experience you all had in COMP 301. It compares the syntax between Java and TypeScript in various situations and should serve as a guide going into the first few weeks of the semester.
 
 ## Syntax
 
@@ -118,7 +118,7 @@ As you can see, in Java, we use the `final` keyword to turn a variable into a co
 
 The way that arrays work in Java and TypeScript are a bit different, and so is the syntax to create them.
 
-In Java, you probably remember that the length of an array cannot be changed once it is set, and that using `ArrayList<>` or any other subtype of `List` (imported from `java.utils.*`) provides this functionality!
+In Java, you probably remember that the length of an array cannot be changed once it is set - and that using `ArrayList<>` or any other subtype of `List` (imported from `java.utils.*`) provides this functionality!
 
 TypeScript arrays **are more similar to the Java `List` than to the Java array**. Creating arrays in TypeScript is also very similar to creating lists in Python. To declare an array in TypeScript, we can simply add `[]` to the end of a variable's *type annotation*, and use brackets to add initial values. Compare the following:
 
@@ -267,7 +267,7 @@ while (conditionA) {
 
 ### The `for` Loop
 
-In both Java and TypeScript, there are two types of loops that both service distinct purposes.
+In both Java and TypeScript, there are two types of loops that both serve distinct purposes.
 
 The first type of loop contains a counter variable that is modified each time the the loop iterates - and, iteration stops when some provided condition evaluates to false. This type of loop exists in ***both*** Java and TypeScript. The code is *nearly* identical, but notice that in the TypeScript version, we need to use our new method of creating variables. We do not say `int i = 0;`, instead we say `let i = 0;`. We can see this here:
 
@@ -295,7 +295,7 @@ for(let i = 0; i < 10; i++) {
 </tr>
 </table>
 
-> **NOTE:** In this example, notice how we do not include the type annotation on the conditional variable. In general, type annotations on variables in TypeScript is not necessary by default. TypeScript infers types of variables when there is no explicit type annotation provided. However, including them it is ***strongly encouraged***. In this case, for conciseness in the for loop header body and the the fact that the variable's type is guaranteed to be `number`, it can be omitted here.
+> **NOTE:** In this example, notice how we do not include the type annotation on the conditional variable. In general, type annotations on variables in TypeScript are not necessary by default. TypeScript infers types of variables when there is no explicit type annotation provided. However, including them is ***strongly encouraged***. In this case, for conciseness in the for loop header body and the the fact that the variable's type is guaranteed to be `number`, it can be omitted here.
 
 The second type of loop in Java allows you to *iterate over a collection*, where a variable is updated with a value corresponding to the current iteration. This is often the most widely-used loop. There are syntactical differences here between Java and TypeScript, both in the *keywords used* and the variable creation convention.
 
@@ -327,7 +327,7 @@ As you can see, like in previous examples, TypeScript uses the `let` keyword. In
 
 ### Defining Functions
 
-Functions is the most fundamental abstraction technique we use all the time in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In TypeScript, we also mainly work in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction.
+Functions are the most fundamental abstraction techniques we use all the time in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In TypeScript, we also mainly work in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction.
 
 There are many fundamental differences in the syntax for creating functions in Java and TypeScript. Let's take a look at an example of a function that takes in a user's name and returns a string that greets the user.
 
@@ -438,7 +438,7 @@ While this seems like just a syntactic change, the implications of this are ***m
 
 To conclude this section, provide two important caveats must be emphasized:
 * Arrow functions don't have their own bindings and therefore should not be used as methods.
-* Arrow functions cannot be used as constructors. Calling them with new throws a `TypeError`.
+* Arrow functions cannot be used as constructors. Calling them with `new` throws a `TypeError`.
 
 These caveats are important to note because traditional functions and arrow functions are not *exactly* the same, and there are some semantic differences.
 
@@ -636,7 +636,7 @@ As you can see, the keywords remain the same between both languages with `interf
 
 There is also another interesting feature of TypeScript worth mentioning here.
 
-TypeScript is a ***structural language***. This means that TypeScript views object as equivalent types *if they share the same structure*, NOT just the same name! On the otherhand, Java is a ***nominal language***, which means it views objects as equivalent types if they share the same name ONLY (or if there is an inheritence relationship).
+TypeScript is a ***structural language***. This means that TypeScript views objects as equivalent types *if they share the same structure*, NOT just the same name! On the otherhand, Java is a ***nominal language***, which means it views objects as equivalent types if they share the same name ONLY (or if there is an inheritence relationship).
 
 So, we can *technically* directly create a value of type `Person` in TypeScript! This is not something you can directly do in Java without creating a subclass. The syntax would look like so:
 
@@ -729,7 +729,7 @@ As you can see, we use `console.log()` to print out values to the console in Typ
 
 #### Enums
 
-Enums (enumerators) are an extremely useful language feature in many programming languages! Enums allow you to define custom, related values or states. Think of enums as implementing a multiple-choice question, where there are many options! Let's a look at an example:
+Enums (enumerators) are an extremely useful language feature in many programming languages! Enums allow you to define custom, related values or states. Think of enums as implementing a multiple-choice question, where there are many options! Let's look at an example:
 
 <table>
 <tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
@@ -789,7 +789,7 @@ Enumerations will be extremely useful in your final projects to model data.
 
 #### Type Aliases
 
-There is a nifty feature in TypeScript called the **type alias**, which essentially allows you to create another label why which you can refer to a type. This can be useful to make types more concise, or to make it more readable for your feature. Look at the following example:
+There is a nifty feature in TypeScript called the **type alias**, which essentially allows you to create another label by which you can refer to a type. This can be useful to make types more concise, or to make it more readable for your feature. Look at the following example:
 
 <table>
 <tr><th width="520">TypeScript</th></tr>
