@@ -15,7 +15,7 @@ In this course, we will use **TypeScript** to build out the frontend of our web 
 
 TypeScript shares some similarities to Java - both are compiled languages, both support object-oriented programming. However, there are many key differences (including their purpose, how they are compiled, etc). You will learn more about these features throughout the course. 
 
-This document is designed to help you become familiar with the syntax and features of TypeScript from the context of the Java experience you all had in COMP 301. It compares the syntax between Java and TypeScript in various situations and should serve as a guide going into the first few weeks of the semester.
+This document is designed to help you become familiar with the syntax and features of TypeScript from the context of the Java experience you all have had in COMP 301. It compares the syntax between Java and TypeScript in various situations and should serve as a guide going into the first few weeks of the semester.
 
 ## Syntax
 
