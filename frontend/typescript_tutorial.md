@@ -25,7 +25,7 @@ The syntax for TypeScript is pretty succint and less verbose than Java! In this 
 
 The first major distinction between Java and TypeScript exists with its typing system. Recall the following:
 
-* **Primitive types** are a set of basic data types in a programming language. All other data types and classes can be constructed from these primitive types. Using standard programming conventions, primitive types are often denoted with a *all-lowercase* name and usually do not need to be imported.
+* **Primitive types** are a set of basic data types in a programming language. All other data types and classes can be constructed from these primitive types. Using standard programming conventions, primitive types are often denoted with an *all-lowercase* name and usually do not need to be imported.
 * **Reference types**, on the other hand, are all of the other types in a language. Reference types are defined as structures that contain or build upon the basic primitive types. Reference types are often defined by *interfaces*, *classes*, and *enumerations*. Reference types, like the name of all clases, often start with a capital letter (For example, `Dog` or `Cat`).
 
 In **Java**, we have the following *primitive* types:
@@ -884,7 +884,7 @@ LinkedList<Student> myRoster = new LinkedList<>();
   
 ```ts
 // Create a linked list that stores strings.
-let yStringList: LinkedList<string> = new LinkedList<>();
+let myStringList: LinkedList<string> = new LinkedList<>();
 // Create a linked list that stores students.
 let myRoster: LinkedList<Student> = new LinkedList<>(); 
 ```
