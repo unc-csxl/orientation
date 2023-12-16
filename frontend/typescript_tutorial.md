@@ -732,8 +732,20 @@ As you can see, we use `console.log()` to print out values to the console in Typ
 Enums (enumerators) are an extremely useful language feature in many programming languages! Enums allow you to define custom, related values or states. Think of enums as implementing a multiple-choice question, where there are many options! Let's a look at an example:
 
 <table>
-<tr><th width="520">TypeScript</th></tr>
+<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
 <tr>
+ <td>
+ 
+```java
+enum Direction {
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
+}
+```
+
+</td>
 <td>
  
 ```ts
@@ -748,6 +760,8 @@ enum Direction {
 </td>
 </tr>
 </table>
+
+As you might notice, creating enums in TypeScript is nearly equivalent to its Java counterpart that you saw in COMP 301! The main difference is that it is convention for Java enum options to be entirely  *capitalized*, while TypeScript enum options only have their *first letter capitalized.*
 
 Let's look at the `Direction` enum applied in a TypeScript function:
 
@@ -825,7 +839,7 @@ console.log(csxlOpeningHour);
 </tr>
 </table>
 
-Ternary operators are *extremely useful* and are used numerous times throughout the CSXL application. I highly recommend checking out the codebase and searching for `?` / `:` to see more relevant examples!
+This is the same syntax that is used in Java! Ternary operators are *extremely useful* and are used numerous times throughout the CSXL application. I highly recommend checking out the codebase and searching for `?` / `:` to see more relevant examples!
 
 #### Generic Types
 
