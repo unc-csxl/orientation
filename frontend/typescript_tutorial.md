@@ -327,7 +327,7 @@ As you can see, like in previous examples, TypeScript uses the `let` keyword. In
 
 ### Defining Functions
 
-Functions are the most fundamental abstraction techniques we use all the time in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In TypeScript, we also mainly work in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction.
+Functions are the most fundamental abstraction technique we use all the time in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In TypeScript, we also mainly work in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction.
 
 There are many fundamental differences in the syntax for creating functions in Java and TypeScript. Let's take a look at an example of a function that takes in a user's name and returns a string that greets the user.
 
