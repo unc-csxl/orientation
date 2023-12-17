@@ -290,31 +290,181 @@ Understanding the *typings* of functions and how to pass functions as values is 
 
 ## Passing Functions as Parameters
 
+Let's take a look at the following example. Say that I have an *array of `number`s*. I want to create a function to *modify these numbers* so that I *call the `doubleNumber` function on every single one of them!
+
+So, if I were to have the following input:
+
+`[0, 2, 4, 8]`
+
+I expect the following output:
+
+`[0, 4, 8, 16]`
+
+Using what you learned from the TypeScript tutorial, we can create this function by utilizing some array functionality. Let's create this function as an arrow function and call it `modifyNumbers()`. This function will take in an array of numbers (`numbers[]`) and return an array of numbers as well.
+
+Feel free to try to implement this on your own as practice first, or look at the code below:
+
+<table>
+<tr><th width="520">Implement `modifyNumbers`</th></tr>
+<tr>
+<td>
+ 
 ```ts
-(number: number): number
+/** Function that doubles the input number */
+let modifyNumbers = (nums: number[]): number[] => {
+
+ // Create an empty list of numbers
+ let newNums: number[] = [];
+
+  // Loop over all of the input numbers
+  for(let num of nums) {
+    // Modify the number
+    let newNum = doubleNumber(num);
+    // Save the new number
+    newNums.append(newNum);
+  }
+
+  // Return the final number
+  return newNums;
+}
 ```
 
+</td>
+</tr>
+</table>
+
+We can now easily pass in an array of numbers, and it should return an array of numbers with all of its numbers doubled.
+
+However, ***what if we want to make `modifyNumbers` more multipurpose?*** *What if we wanted to have `modifyNumbers` also be able to triple a number? Halve a number? Square the number?*
+
+We *could* rewrite the `modifyNumbers` function every single time, except that seems incredibly inefficient. *What if there was a way to pass in which function we wanted to modify each number with into the `modifyNumbers` function?* So for example, I could pass in `doubleNumber` if I wanted my function to double the numbers, or pass in `squareNumber` if I wanted to square each number.
+
+Well, ***we can!*** Since *functions can be used as values, we can use them as **function parameters** too!*
+
+Recall how we implemented the `doubleNumber` function again. We could easily implement a few more functions like `doubleNumber` that would perform these other operations for us.
+
+<table>
+<tr><th width="520">Number Modifier Functions</th></tr>
+<tr>
+<td>
+ 
+```ts
+/** Function that doubles the input number */
+let doubleNumber: (num: number) => number = (num: number): number {
+  return num * 2;
+}
+
+/** Function that triples the input number */
+let tripleNumber: (num: number) => number = (num: number): number {
+  return num * 3;
+}
+
+/** Function that halves the input number */
+let halveNumber: (num: number) => number = (num: number): number {
+  return num * 0.5;
+}
+
+/** Function that squares the input number */
+let squareNumber: (num: number) => number = (num: number): number {
+  return num * num;
+}
+```
+
+
+</td>
+</tr>
+</table>
+
+We now have many different functions that perform an operation on a specific input number! Despite it being messier and less readable, the functions above include their *type annotations*. If you notice, all of these functions have the same type annotation: `(num: number) => number`!
+
+Recall the header from our `modifyNumbers` function:
+
+```ts
+let modifyNumbers = (nums: number[]): number[] => { ... }`
+```
+
+The header for our function takes in *one* parameter currently - a list of numbers. We then perform operations with the inputted list of numbers. To specify this parameter, we just included a name and a *type annotation*.
+
+If we wanted to pass in a *function* in here, how would we add this into our function header?
+
+```ts
+let modifyNumbers = (nums: number[], modifierFunction: (num: number) => number): number[] => { ... }
+```
+
+As you can see, this now would provide a new parameter called `modifierFunction` of type `(num: number) => number` that will enable us to pass in a function with that type annotation! 
+
+To make our lives easier and make our code a lot more concise, we can also create a [*type alias*](https://github.com/unc-csxl/orientation/blob/main/frontend/typescript_tutorial.md#type-aliases) for our function's type! That will make it easier to type and more readable. If you are not familiar with type annotations, check out the TypeScript Tutorial docs to learn more.
+ 
 ```ts
 type NumberModifier = (number: number): number
 ```
 
+Now, our new header for `modifyNumbers` would look like so:
+
 ```ts
+let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[] => { ... }
+```
 
-let doubleNumber = (num: number) => {
-  return num * 2;
-}
+Finally, let's implement our new `modifyNumbers` function!
 
+<table>
+<tr><th width="800">Implement `modifyNumbers` With Function Parameter</th></tr>
+<tr>
+<td>
+ 
+```ts
+/** Function that modifies the input number */
+let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[] => {
 
-let modifyNumbers = (nums: number[]): number[] => {
+ // Create an empty list of numbers
+ let newNums: number[] = [];
 
-  let newNums: number[] = [];
-
+  // Loop over all of the input numbers
   for(let num of nums) {
-    let newNum = doubleNumber(num);
+    // Modify the number
+    // !! - We call the passed in function here!
+    let newNum = modifierFunction(num);
+    // Save the new number
     newNums.append(newNum);
   }
 
+  // Return the final number
   return newNums;
 }
-
 ```
+
+</td>
+</tr>
+</table>
+
+This is super useful! Let's see our new `modifierFunction` in action:
+
+<table>
+<tr><th width="520">Use the `modifierFunction` Function</th></tr>
+<tr>
+<td>
+ 
+```ts
+let numList: number[] = [0, 1, 4]
+
+// Double the number
+modifyNumbers(numList, doubleNumber);
+// Returns : [0, 2, 8]
+
+// Triple the number
+modifyNumbers(numList, tripleNumber);
+// Returns : [0, 3, 12]
+
+// Halve the number
+modifyNumbers(numList, halveNumber);
+// Returns : [0, 1, 4]
+
+// Square the number
+modifyNumbers(numList, squareNumber);
+// Returns : [0, 1, 16]
+```
+
+</td>
+</tr>
+</table>
+
