@@ -413,6 +413,9 @@ Finally, let's implement our new `modifyNumbers` function!
 <td>
  
 ```ts
+/** Type alias for our number modifier functions */
+type NumberModifier = (number: number): number
+
 /** Function that modifies the input number */
 let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[] => {
 
