@@ -269,14 +269,14 @@ Just like with normal TypeScript variables, we can also apply type annotations t
  
 ```ts
 /** Function that doubles the input number */
-let doubleNumber = (num: number): number {
+let doubleNumber = (num: number): number => {
   return num * 2;
 }
 
 // OR
 
 /** Function that doubles the input number */
-let doubleNumber: (num: number) => number = (num: number): number {
+let doubleNumber: (num: number) => number = (num: number): number => {
   return num * 2;
 }
 ```
@@ -350,22 +350,22 @@ Recall how we implemented the `doubleNumber` function again. We could easily imp
  
 ```ts
 /** Function that doubles the input number */
-let doubleNumber: (num: number) => number = (num: number): number {
+let doubleNumber: (num: number) => number = (num: number): number => {
   return num * 2;
 }
 
 /** Function that triples the input number */
-let tripleNumber: (num: number) => number = (num: number): number {
+let tripleNumber: (num: number) => number = (num: number): number => {
   return num * 3;
 }
 
 /** Function that halves the input number */
-let halveNumber: (num: number) => number = (num: number): number {
+let halveNumber: (num: number) => number = (num: number): number => {
   return num * 0.5;
 }
 
 /** Function that squares the input number */
-let squareNumber: (num: number) => number = (num: number): number {
+let squareNumber: (num: number) => number = (num: number): number => {
   return num * num;
 }
 ```
