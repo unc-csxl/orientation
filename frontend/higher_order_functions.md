@@ -252,7 +252,7 @@ let doubleNumber = (num: number): number => {
 
 Hopefully, you are able to see how we can *use functions as values* to assign to a variable!
 
-Lastly, remember that values always have a certain *data type* associated with them. Recall the table above - the `course` variable is of type `number`, the `name` variable is of type `string`, and the `yoda` variable is of type `Jedi`. So, *what type is `doubleNumber`?
+Lastly, remember that values always have a certain *data type* associated with them. Recall the table above - the `course` variable is of type `number`, the `name` variable is of type `string`, and the `yoda` variable is of type `Jedi`. So, *what type is `doubleNumber`*?
 
 The type annotations for function literals *are based on their inputs and output*. The type annotation has the following formula:
 
@@ -290,7 +290,7 @@ Understanding the *typings* of functions and how to pass functions as values is 
 
 ## Passing Functions as Parameters
 
-Let's take a look at the following example. Say that I have an *array of `number`s*. I want to create a function to *modify these numbers* so that I *call the `doubleNumber` function on every single one of them!
+Let's take a look at the following example. Say that I have an *array of `number`s*. I want to create a function to *modify these numbers* so that I *call the `doubleNumber` function on every single one of them*!
 
 So, if I were to have the following input:
 
@@ -321,7 +321,7 @@ let modifyNumbers = (nums: number[]): number[] => {
     // Modify the number
     let newNum = doubleNumber(num);
     // Save the new number
-    newNums.append(newNum);
+    newNums.push(newNum);
   }
 
   // Return the final number
@@ -428,7 +428,7 @@ let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[]
     // !! - We call the passed in function here!
     let newNum = modifierFunction(num);
     // Save the new number
-    newNums.append(newNum);
+    newNums.push(newNum);
   }
 
   // Return the final number
@@ -440,10 +440,10 @@ let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[]
 </tr>
 </table>
 
-This is super useful! Let's see our new `modifierFunction` in action:
+This is super useful! As you can see, we modified our function to use the passed in `modifierFunction` to actually modify each number in our array. Let's see our new `modifyNumbers` function in action:
 
 <table>
-<tr><th width="520">Use the `modifierFunction` Function</th></tr>
+<tr><th width="520">Use the `modifyNumbers` Function</th></tr>
 <tr>
 <td>
  
