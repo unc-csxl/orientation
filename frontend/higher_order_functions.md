@@ -252,7 +252,7 @@ let doubleNumber = (num: number): number => {
 
 Hopefully, you are able to see how we can *use functions as values* to assign to a variable!
 
-Lastly, remember that values always have a certain *data type* associated with them. Recall the able above - the `course` variable is of type `number`, the `name` variable is of type `string`, and the `yoda` variable is of type `Jedi`. So, *what type is `doubleNumber`?
+Lastly, remember that values always have a certain *data type* associated with them. Recall the table above - the `course` variable is of type `number`, the `name` variable is of type `string`, and the `yoda` variable is of type `Jedi`. So, *what type is `doubleNumber`?
 
 The type annotations for function literals *are based on their inputs and output*. The type annotation has the following formula:
 
