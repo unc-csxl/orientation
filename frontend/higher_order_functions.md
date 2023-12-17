@@ -642,7 +642,7 @@ We have just found *what we want our function to return!* Let's finish implement
 returns the number multiplied by the factor. */
 let generateMultiplyModifierFunction = (factor: number): (num: number) => number => {
 
- // Return a modifier function that takes in a number and returns the number * n
+ // Return a modifier function that takes in a number and returns the number * factor
  return (num: number): number => {
   return num * factor;
  }
