@@ -380,7 +380,7 @@ We now have many different functions that perform an operation on a specific inp
 Recall the header from our `modifyNumbers` function:
 
 ```ts
-let modifyNumbers = (nums: number[]): number[] => { ... }`
+let modifyNumbers = (nums: number[]): number[] => { ... }
 ```
 
 The header for our function takes in *one* parameter currently - a list of numbers. We then perform operations with the inputted list of numbers. To specify this parameter, we just included a name and a *type annotation*.
@@ -396,7 +396,7 @@ As you can see, this now would provide a new parameter called `modifierFunction`
 To make our lives easier and make our code a lot more concise, we can also create a [*type alias*](https://github.com/unc-csxl/orientation/blob/main/frontend/typescript_tutorial.md#type-aliases) for our function's type! That will make it easier to type and more readable. If you are not familiar with type annotations, check out the TypeScript Tutorial docs to learn more.
  
 ```ts
-type NumberModifier = (number: number): number
+type NumberModifier = (number: number) => number
 ```
 
 Now, our new header for `modifyNumbers` would look like so:
@@ -414,7 +414,7 @@ Finally, let's implement our new `modifyNumbers` function!
  
 ```ts
 /** Type alias for our number modifier functions */
-type NumberModifier = (number: number): number
+type NumberModifier = (number: number) => number
 
 /** Function that modifies the input number */
 let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[] => {
@@ -474,3 +474,183 @@ modifyNumbers(numList, squareNumber);
 The ability to pass functions into other functions is an extremely powerful feature of TypeScript that is commonly used and built-in to many TypeScript language features. We will explore these features in a second, optional reading.
 
 ## Returning Functions from other Functions
+
+In the previous section, we explored passing functions into other functions as parameters. In this section, we are going to try one more thing: *returning functions from functions*. Remember that ultimately, functions just return *values*. Since the arrow function syntax allows us to represent functions as values, we can also use this **return functions from within functions!**
+
+Let's continue to use the example we have been working with in the previous sections. We implemented two functions - `doubleNumber` and `tripleNumber`. What if, though, we wanted to multiply a number by 4? 5? any number?
+
+Recall a nifty design pattern from COMP 301 - the *factory* design pattern. The factory design pattern allows us to create different versions of a class based on a certain parameter.
+
+**What if we can create a function that *generates* different functions depending on what number we want to multiply by?**
+
+That way, if we call our new function `generateMultiplyModifierFunction`, we ultimately can do the following:
+
+<table>
+<tr><th width="520">The Goal</th></tr>
+<tr>
+<td>
+ 
+```ts
+let numList: number[] = [0, 1, 4]
+
+// Generates a function that doubles a number
+let doubleNumber: (number: number) => number = generateMultiplyModifierFunction(2);
+
+// Double the numbers
+modifyNumbers(numList, doubleNumber);
+// Returns : [0, 2, 8]
+
+// Generates a function that quadruples a number
+let quadrupleNumber: (number: number) => number = generateMultiplyModifierFunction(4);
+
+// Quadruple the numbers
+modifyNumbers(numList, quadrupleNumber);
+// Returns : [0, 4, 16]
+
+```
+
+</td>
+</tr>
+</table>
+
+We know that our new function should *return* a function that is compatible with the parameter in `modifyNumbers`, which should be a function that inputs a number and returns a number. So, the return type signature should be `(num: number) => number`.
+
+From there, we also need an *input* to our generate function. This input is the *factor* by which we want to multiply.
+
+Let's create the skeleton of our `generateMultiplyModifierFunction` function!
+
+<table>
+<tr><th width="520">`generateMultiplyModifierFunction` Header</th></tr>
+<tr>
+<td>
+ 
+```ts
+
+/** Generates a modifier function that takes in a number and
+returns the number multiplied by the factor. */
+let generateMultiplyModifierFunction = (factor: number): (num: number) => number => {
+ 
+}
+```
+
+</td>
+</tr>
+</table>
+
+Now, let's think about what we are actually trying to *return*. Let's think about what we would want as the *output* of this function given a few sample inputs:
+
+<table>
+<tr><th width="460">Function Call</th><th width="520">Expected Return Value</th></tr>
+<tr>
+<td>
+ 
+```ts
+generateMultiplyModifierFunction(2);
+```
+
+</td>
+ <td>
+
+```ts
+(num: number): number => {
+ return num * 2;
+}
+```
+
+</td>
+</tr>
+<tr>
+ <td>
+ 
+```ts
+generateMultiplyModifierFunction(5);
+```
+
+</td>
+ <td>
+
+```ts
+(num: number): number => {
+ return num * 5;
+}
+```
+
+</td>
+</tr>
+<tr>
+ <td>
+ 
+```ts
+generateMultiplyModifierFunction(0.5);
+```
+
+</td>
+ <td>
+
+```ts
+(num: number): number => {
+ return num * 0.5;
+}
+```
+
+</td>
+</tr>
+</table>
+
+As you can see, there is a pattern emerging! Let's extrapolate such that we replace our input with an arbitrary `n`:
+
+<table>
+<tr><th width="460">Function Call</th><th width="520">Expected Return Value</th></tr>
+<tr>
+<td>
+ 
+```ts
+generateMultiplyModifierFunction(n);
+```
+
+</td>
+ <td>
+
+```ts
+(num: number): number => {
+ return num * n;
+}
+```
+
+</td>
+</tr>
+</table>
+
+We have just found *what we want our function to return!* Let's finish implementing the `generateMultiplyModifierFunction` function.
+
+```ts
+
+/** Generates a modifier function that takes in a number and
+returns the number multiplied by the factor. */
+let generateMultiplyModifierFunction = (factor: number): (num: number) => number => {
+
+ // Return a modifier function that takes in a number and returns the number * n
+ return (num: number): number => {
+  return num * n;
+ }
+}
+```
+
+As you can see, this might be a bit confusing at first! Essentially though, our `generateMultiplyModifierFunction` just returns another function for us to use elsewhere.
+
+Ultimately though, there are some pretty cool use cases for functions being able to generate other functions. While the syntax is a bit messy, using some TypeScript language features such as *type aliases* may help to make it easier to understand.
+
+## Conclusion
+
+Congratulations! ✨ Throughout this reading, you have learned how to use *functions as values*. Doing so has enabled us to use functions both ***as parameters*** in other functions, as well as ***return values*** of other functions. What you have learned to implement here are *higher order functions*.
+
+**Higher order functions** are functions that either take in other functions are parameters, or return a function as their result. Higher order functions enable us to program more in a *funtional programming style* by allowing us to abstract functionality into higher order functions, and to use higher order functions to generate functionality based on certain parameters.
+
+TypeScript uses higher order functions throughout its language features, and higher order functions are used a lot throughout the CSXL web application's codebase. Being able to trace code with higher order functions is quite challenging at first. One of the best ways to practice using higher order functions is to play around with them and create your own examples! Just like in the previous tutorial, we highly recommend you go to the official [TypeScript playground](https://www.typescriptlang.org) or open a new [Repl.it](https://replit.com) and play around with creating and using higher order functions.
+
+In addition, below are some additional resources that you may find useful:
+
+## Extra Resources
+
+* [Learn JS: Iterators and Higher Order Functions](https://www.codecademy.com/learn/game-dev-learn-javascript-higher-order-functions-and-iterators/modules/game-dev-learn-javascript-iterators/cheatsheet)
+
