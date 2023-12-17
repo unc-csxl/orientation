@@ -531,6 +531,15 @@ returns the number multiplied by the factor. */
 let generateMultiplyModifierFunction = (factor: number): (num: number) => number => {
  
 }
+
+/* NOTE: I will not use the type alias in the next examples to get you a bit more familiar
+* with the expanded syntax so you are able to recognize it if you see it. However, if it
+* helps to understand the input and output, here would be the function header using
+* the NumberModifer alias created in this line: `type NumberModifier = (num: number) => number`
+*
+* let generateMultiplyModifierFunction = (factor: number): NumberModifier => { ... }
+*/
+
 ```
 
 </td>
