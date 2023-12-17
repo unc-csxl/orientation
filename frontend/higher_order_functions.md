@@ -471,3 +471,6 @@ modifyNumbers(numList, squareNumber);
 </tr>
 </table>
 
+The ability to pass functions into other functions is an extremely powerful feature of TypeScript that is commonly used and built-in to many TypeScript language features. We will explore these features in a second, optional reading.
+
+## Returning Functions from other Functions
