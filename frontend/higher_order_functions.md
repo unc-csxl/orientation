@@ -494,14 +494,14 @@ That way, if we call our new function `generateMultiplyModifierFunction`, we ult
 let numList: number[] = [0, 1, 4]
 
 // Generates a function that doubles a number
-let doubleNumber: (number: number) => number = generateMultiplyModifierFunction(2);
+let doubleNumber: (num: number) => number = generateMultiplyModifierFunction(2);
 
 // Double the numbers
 modifyNumbers(numList, doubleNumber);
 // Returns : [0, 2, 8]
 
 // Generates a function that quadruples a number
-let quadrupleNumber: (number: number) => number = generateMultiplyModifierFunction(4);
+let quadrupleNumber: (num: number) => number = generateMultiplyModifierFunction(4);
 
 // Quadruple the numbers
 modifyNumbers(numList, quadrupleNumber);
