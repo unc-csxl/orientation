@@ -597,7 +597,7 @@ generateMultiplyModifierFunction(0.5);
 </tr>
 </table>
 
-As you can see, there is a pattern emerging! Let's extrapolate such that we replace our input with an arbitrary `n`:
+As you can see, there is a pattern emerging! Let's extrapolate such that we replace our input with an arbitrary `factor`:
 
 <table>
 <tr><th width="460">Function Call</th><th width="520">Expected Return Value</th></tr>
@@ -605,7 +605,7 @@ As you can see, there is a pattern emerging! Let's extrapolate such that we repl
 <td>
  
 ```ts
-generateMultiplyModifierFunction(n);
+generateMultiplyModifierFunction(factor);
 ```
 
 </td>
@@ -613,7 +613,7 @@ generateMultiplyModifierFunction(n);
 
 ```ts
 (num: number): number => {
- return num * n;
+ return num * factor;
 }
 ```
 
@@ -635,7 +635,7 @@ let generateMultiplyModifierFunction = (factor: number): (num: number) => number
 
  // Return a modifier function that takes in a number and returns the number * n
  return (num: number): number => {
-  return num * n;
+  return num * factor;
  }
 }
 ```
