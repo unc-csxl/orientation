@@ -623,8 +623,12 @@ generateMultiplyModifierFunction(n);
 
 We have just found *what we want our function to return!* Let's finish implementing the `generateMultiplyModifierFunction` function.
 
+<table>
+<tr><th width="520">`generateMultiplyModifierFunction` Implementation</th></tr>
+<tr>
+<td>
+ 
 ```ts
-
 /** Generates a modifier function that takes in a number and
 returns the number multiplied by the factor. */
 let generateMultiplyModifierFunction = (factor: number): (num: number) => number => {
@@ -635,6 +639,10 @@ let generateMultiplyModifierFunction = (factor: number): (num: number) => number
  }
 }
 ```
+
+</td>
+</tr>
+</table>
 
 As you can see, this might be a bit confusing at first! Essentially though, our `generateMultiplyModifierFunction` just returns another function for us to use elsewhere.
 
