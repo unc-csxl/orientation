@@ -460,7 +460,7 @@ modifyNumbers(numList, tripleNumber);
 
 // Halve the number
 modifyNumbers(numList, halveNumber);
-// Returns : [0, 1, 4]
+// Returns : [0, 0.5, 2]
 
 // Square the number
 modifyNumbers(numList, squareNumber);
