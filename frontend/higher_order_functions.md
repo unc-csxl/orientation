@@ -396,7 +396,7 @@ As you can see, this now would provide a new parameter called `modifierFunction`
 To make our lives easier and make our code a lot more concise, we can also create a [*type alias*](https://github.com/unc-csxl/orientation/blob/main/frontend/typescript_tutorial.md#type-aliases) for our function's type! That will make it easier to type and more readable. If you are not familiar with type annotations, check out the TypeScript Tutorial docs to learn more.
  
 ```ts
-type NumberModifier = (number: number) => number
+type NumberModifier = (num: number) => number
 ```
 
 Now, our new header for `modifyNumbers` would look like so:
