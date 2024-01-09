@@ -1,19 +1,21 @@
 # TypeScript For the COMP 301 Java Developer
 
-> Written by Ajay Gandecha for the CSXL Web Application and for COMP 423: Foundations of Software Engineering.<br>
+> Written by Ajay Gandecha and Kris Jordan for the CSXL Web Application and for COMP 423: Foundations of Software Engineering.<br>
 > *Last Updated: 12/14/2023*
 
 ## Preface
 
-**Welcome to COMP 423!** 🥳 During your career at UNC, you likely started out in COMP 110 learning the *Python* programming language. In COMP 210, you transitioned to Java and learned how to organize your code using classes and common data structures. In COMP 301, you built off of this idea and learned more about useful language features to help you gain a foundational toolbox to approach software engineering problems.
+**Welcome to COMP 423!** 🥳 During your career at UNC, you likely started out in COMP 110 learning the *Python* programming language. In COMP 210, you transitioned to Java and learned how to organize your code using classes and common data structures. In COMP 301, you built off of this idea and learned more about useful language features to help you gain a toolbox of design patterns and strategies for approaching software architecture challenges.
 
-This course aims to teach you the *foundations of full-stack software engineering*. Full-stack development involves the development of a *frontend*, or an application (web, mobile, etc) that a user interacts with, as well as a *backend* running on a server that helps to support your frontend and provide data to it. 
+This course aims to teach you the *foundations of software engineering* in the context of full-stack development. Full-stack development involves a *frontend*, or an application (web, mobile, etc) that a user interacts with, as well as a *backend* running on one or more servers that serves data to applications across devices and many users. 
 
-Since this course is focused on developing full-stack *web* applications, you need to gain familiarity with the programming languages and tools needed to build high quality web apps. **JavaScript** is the *leading programming language that powers the web* and web applications. According to the **[2023 StackOverflow Developer Survey](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies)**, developers ranked JavaScript as their most commonly-used programming language - an ***eleven-year long streak** and counting!*
+Since this course's semester project is currently focused on *web* applications, you need to gain familiarity with the programming languages and tools needed to build high quality web apps. **JavaScript** is the *leading programming language that powers the web* and web applications. According to the **[2023 StackOverflow Developer Survey](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies)**, developers ranked JavaScript as their most commonly-used programming language - an ***eleven-year long streak** and counting!*
 
-In this course, we will use **TypeScript** to build out the frontend of our web applications. TypeScript is a *superset* of JavaScript - it adds on static typing with optional type annotations to JavaScript, meaning that writing code and keeping data types consistent is significantly easier. Because of its type safety features, it is designed for the development of large applications - it even transpiles to JavaScript!
+In this course, we will use **TypeScript** to build out the frontend of our web applications. TypeScript is a *superset* of JavaScript - it adds **static typing** with optional type annotations to JavaScript. It transpiles to JavaScript.
 
-TypeScript shares some similarities to Java - both are compiled languages, both support object-oriented programming. However, there are many key differences (including their purpose, how they are compiled, etc). You will learn more about these features throughout the course. 
+Static typing is practiced in COMP110 with Python's modern type annotations, which were actually inpsired by TypeScript's success, and has its roots in industrial languages like Java and C. The word "static", in this context, refers to _at development time_ which is, importantly, not _at runtime_. You can think of static as "code at rest" when it is in your editor or being analyzed by a compiler, not code that is actually running on a machine. Specifying static types allows the TypeScript IDE (e.g., VSCode) and compiler to verify that your code's expressions and statements are **type safe**. An example of a type safety check would be ensuring that if your code contains a call to a method named `bar` on an object of type `Foo`, that in the `Foo` class definition there actually exists a method named `bar` with the correct parameters corresponding to the arguments provided. Without type safety, or static type annotations, you increase your risk of writing code that breaks _when your users are using it, after release_, rather than at development time, before release. Static type specification also serves as a form of built-in documentation for other developers on your team to know how to properly use each other's code more reliably and confidently. **Static type checking represents an important theme of Software Engineering as a discipline, and this course: time invested in detailed specification and documentation allows teams to collaborate more successfully and unlocks opportunities to verify correctness with tools during development.**
+
+TypeScript shares some similarities to Java - both are high-level languages, both support object-oriented programming. However, there are many key differences (including their purpose, how they are compiled, etc). You will learn more about these features throughout the course. 
 
 This document is designed to help you become familiar with the syntax and features of TypeScript from the context of the Java experience you all have had in COMP 301. It compares the syntax between Java and TypeScript in various situations and should serve as a guide going into the first few weeks of the semester.
 
@@ -33,16 +35,14 @@ In **Java**, we have the following *primitive* types:
 * `double`: Represents a number that can store fractions (decimal places).
 * `boolean`: Represents a state that can either be `true` or `false`.
 
-Note that in Java, `String` is a *reference* type.
-
 In **TypeScript**, on the otherhand, we have **different** primitive types. TypeScript defines the following:
 * `number`: Represents a number that can store fractions (decimal places).
 * `boolean`: Represents a state that can either be `true` or `false`.
 * `string`: Represents a sequence of characters.
 
-There are two important things to note here. First, notice that there is not really a distinction between *integers* and *floats / doubles*. We use `number` in TypeScript for both. This is actually super helpful because it can prevent a lot of arithmetic errors or unexpected results.
+Notice there is not a type distinction between *integers* and *floats / doubles*. We use `number` in TypeScript for both. This is helpful because it effectively allows us to work with double-floating point, 64-bit, values for all numerical computations.
 
-Second, notice that `string` is a *value* type in TypeScript. This is important to remember to keep your types and capitalization consistent.
+Second, notice that `string` is not capitalized in TypeScript. Technically, the string values we use wind up being references and realizations of the immutable `String` class in TypeScript/JavaScript, with its expected methods, but its type is specified with lowercase letters as a built-in.
 
 ### Variable and Constant Declarations
 
@@ -129,7 +129,7 @@ TypeScript arrays **are more similar to the Java `List` than to the Java array**
  
 ```py
 # Initialize
-names = ["Aziz", "Andrew"]
+names: list[str] = ["Aziz", "Andrew"]
 # Add values
 names.append("Jordan")
 # Replace a value
@@ -189,17 +189,21 @@ let aziz: string = names[0];
 </tr>
 </table>
 
-Just like in Python lists and traditional Java arrays (but unlike Java's `List`), we can select values of TypeScript arrays using the `[]` syntax.
+Just like in Python lists and traditional Java arrays (but unlike Java's `List`), we can index values of TypeScript arrays using the subscription `[]` syntax.
 
-As shown in the code above, TypeScript does not have a built-in *delete* function - but, it does have `.splice(i, n)`, which removes `n` number of elements *starting at index `i`*. So, we can combine this with `.indexOf()` to delete our value.
+As shown in the code above, TypeScript does not have a built-in *delete* method - but, it does have `.splice(i, n)`, which removes `n` number of elements *starting at index `i`*. So, we can combine this with `.indexOf()` to delete our value.
 
-TypeScript also has a `.pop()` function in TypeScript that removes the *last* item of an array. 
+TypeScript's arrays also have a `.pop()` method that removes the *last* item of an array. 
 
 ### Conditionals
 
 Java and TypeScript have similar syntax for creating *conditional statements* and *if-statements*. 
 
 TypeScript uses the same **boolean operators** that Java does. This means that `&&` represents *AND*, `||` represents *OR*, and `!` represents *NOT*. TypeScript and Java both use the lowercased `true` and `false` for boolean values.
+
+Additionally, following in the C-family heritage, the `&&` and `||` operators are short-circuiting. If the left-hand expression of an `&&` operator is `false`, the right-hand expression will not be evaluated. Conversely, if the left-hand expression of an `||` operator is `true`, then the right-hand expression will not be evaluated. This matters when the right-hand expression contains a function or method call that mutates state.
+
+Coming from Java, one surprising feature of JavaScript and TypeScript is the notion of _truthiness_. You can learn more about [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) values on MDN, a great documentation resource for front-end web concerns. Many values besides the boolean value `true` are treated as `true`/"truthy" in boolean contexts in JavaScript. For example, any non-empty strings and any non-zero numbers are considered "truthy" in boolean contexts. This means you can write a valid, type safe expression like `"foo" || ""`. Surprisingly, the `||` operator evaluates to its first truthy value, so `"foo" || ""`, `"" || "foo"`, and `"foo" || "bar"` all evaluate to `"foo"`, not `true`. This is handy and commonly used in variable initialization statements, such as `let initialValue: string = userInput || "Default Value";`
 
 If-statements have the ***same syntax and usage*** as they do in Java!
 
@@ -327,7 +331,7 @@ As you can see, like in previous examples, TypeScript uses the `let` keyword. In
 
 ### Defining Functions
 
-Functions are the most fundamental abstraction technique we use all the time in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In TypeScript, we also mainly work in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction.
+Functions are the most fundamental abstraction technique we use in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In TypeScript, we also mainly work in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction: methods are called on an object (e.g. `object.method()`) whereas functions are generally called standalone `function()`. This distinction has some nuance in more advanced uses of TypeScript/JavaScript, but is generally how you should approach it.
 
 There are many fundamental differences in the syntax for creating functions in Java and TypeScript. Let's take a look at an example of a function that takes in a user's name and returns a string that greets the user.
 
@@ -427,7 +431,7 @@ let greet = (name: string): string => {
 
 There are a few things to unpack here. First, it looks like we are ultimately assigning *"something"* to a *variable.* We use the `let` keyword and we provide a variable name! On the right, we have a weird structure that would go in the *value* spot of our variable formula.
 
-In fact, this is exactly what we are doing. We are saving a *function* to a variable and giving it a name that we can use to call it. In the `( )`, we provide the parameters to the function. We provide a return type in the type annotation as well. Then, we use `=>` to connect these parameters to a *function body*.
+In fact, this is exactly what we are doing! We are saving a *function* to a variable and giving it a name that we can use to call it. In the `( )`, we provide the parameters to the function. We provide a return type in the type annotation as well. Then, we use `=>` to connect these parameters to a *function body*.
 
 We can then call our function in the same way we would normally, like so:
 ```ts
@@ -437,7 +441,7 @@ greet("Jade");
 While this seems like just a syntactic change, the implications of this are ***massive*** and opens the door to an entire new world of programming called **functional programming**, as we can pass around functions as values. This is something that we will be covering *extensively* throughout this course, however it is super important to become familiar with the arrow function syntax now so it is less suprising later!
 
 To conclude this section, provide two important caveats must be emphasized:
-* Arrow functions don't have their own bindings and therefore should not be used as methods.
+* Arrow functions don't have their own `this` bindings and therefore should not be used when defining methods of a class.
 * Arrow functions cannot be used as constructors. Calling them with `new` throws a `TypeError`.
 
 These caveats are important to note because traditional functions and arrow functions are not *exactly* the same, and there are some semantic differences.
@@ -622,7 +626,7 @@ public class Student implements Person { /* ... */ }
   
 ```ts
 public interface Person {
- name: String;
+ name: string;
 }
 
 public class Student implements Person { /* ... */ }
@@ -636,7 +640,7 @@ As you can see, the keywords remain the same between both languages with `interf
 
 There is also another interesting feature of TypeScript worth mentioning here.
 
-TypeScript is a ***structural language***. This means that TypeScript views objects as equivalent types *if they share the same structure*, NOT just the same name! On the otherhand, Java is a ***nominal language***, which means it views objects as equivalent types if they share the same name ONLY (or if there is an inheritence relationship).
+TypeScript employs ***structural type checking***. This means that TypeScript views objects as equivalent types *if they share the same structure*, NOT just the same name! On the otherhand, Java is a ***nominally type language***, which means it views objects as equivalent types if they share the same name ONLY (or if there is an inheritence relationship).
 
 So, we can *technically* directly create a value of type `Person` in TypeScript! This is not something you can directly do in Java without creating a subclass. The syntax would look like so:
 
@@ -646,18 +650,18 @@ So, we can *technically* directly create a value of type `Person` in TypeScript!
 <td>
  
 ```ts
-person: Person = {
+let person: Person = {
  name: "Charles"
-}
+};
 ```
 
 </td>
 </tr>
 </table>
 
-In this example, we use JSON (JavaScript object notation) to *create an object of data* that contains the *same properties* that a `Person` objct should have. Suprisingly enough, due to TypeScript being a structural language, this ***is a valid way to instantiate a `Person` object!***
+In this example, we use JSON (JavaScript object notation) to *create an object of data* that contains the *same properties* that a `Person` objct should have. Suprisingly enough, due to TypeScript being a structural language, this ***is a valid way to instantiate an object, technically of type object, that can used anywhere an object of type `Person` is expected without explicitly implementing the `Person` interface!***
 
-This distinction is pretty cool, and it allows us to do some interesting things with TypeScript. We will explore this more throughout COMP 423.
+This feature is often called "duck typing", thanks to the addage "if it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck." TypeScript and structural typing take it further: "if it's a goose that looks like a duck, then it's a duck." In programming, structural type checking like TypeScript's, relaxes the strictness of nominal typing like Java's, by embracing the idea that _if an object has all the same fields and methods needed as some other type_, then it's probably OK to treat it as that other type.
 
 ### Extra TypeScript Features
 
@@ -725,7 +729,7 @@ console.log(taName);
 </tr>
 </table>
 
-As you can see, we use `console.log()` to print out values to the console in TypeScript.
+As you can see, we use `console.log()` to print out values to the console in TypeScript. To see values printed to `console.log()` in a browser, you will need to open your browser's developer tools and view its console tabl.
 
 #### Enums
 
@@ -810,10 +814,10 @@ Using the `type` keyword, we give `number` an alias as `Rating`. Now, we can use
 
 #### Ternary Operator
 
-The last super useful feature of TypeScript I wanted to feature here is the **ternary operator**. The ternary operator allows you to *conditionally assign a value to a variable!* This means that if a condition is true, I can assign one value - and if false, I can assign the other.
+The last super useful feature of TypeScript to feature in this document is the **ternary operator**. The ternary operator allows you to write a *conditional expression*. Unlike the `if`/`else` syntax in TypeScript and Java, which are statements, the ternary operator results in an expression. This means that if a condition is `true`, the expression can evaluate to one value and if it's `false`, another.
 
 The ternary operator uses the following syntax:
-`condition ? value if true : value if false`
+`condition ? expr_if_true : expr_if_false`
 
 Let's look at an example relating to the CSXL site:
 
@@ -833,6 +837,10 @@ console.log(csxlOpeningHour);
 // >> 10
 // Output IF isWeekday = false:
 // >> 12
+
+// Since the ternary operator produces an expression, it can
+// also be used like:
+console.log(isWeekday ? "Weekday" : "Weekend")
 ```
 
 </td>
