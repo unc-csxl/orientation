@@ -173,7 +173,7 @@ let names: string[] = ["Aziz, "Andrew"]
 // Add values
 names.push("Jordan");
 // Replace a value
-names[3] = "Kris";
+names[2] = "Kris";
 // Remove a value
 names.splice(names.indexOf("Kris"), 1); // Removes by value
 names.splice(1, 1); // Removes by index
