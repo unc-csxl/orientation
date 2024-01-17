@@ -1,6 +1,6 @@
 # Introduction to Higher Order Functions
 
-> Written by Ajay Gandecha for the CSXL Web Application and for COMP 423: Foundations of Software Engineering.<br>
+> Written by Ajay Gandecha and edited by Kris Jordan for the CSXL Web Application and for COMP 423: Foundations of Software Engineering.<br>
 > *Last Updated: 12/16/2023*
 
 ## Preface and Recap
@@ -200,7 +200,7 @@ let yoda = new Jedi("Yoda");
 
 In the examples above, we store various values - from primitive types in TypeScript to objects. ***Functions*** now join the list as a possible type of value that can be stored in variables.
 
-In TypeScript, we can use the arrow syntax we learned to create ***function literals***. Function literals are how we can store functions as values. They define the three basic parts of a function - the *inputs (parameters)* that the function should take in, and the body of the function that ultimately performs some sort of action and returns an *output*.
+In TypeScript, we can use the arrow syntax we learned to create ***function literals***. Function literals declare anonymous functions and are reference values. They define the three basic parts of a function - the *parameters (inputs)* that the function expects a caller's arguments to provide, the *return type*, and the *body* of the function that ultimately returns the evaluated value of a function call.
 
 The function literal syntax looks like the following:
 
@@ -221,7 +221,21 @@ The function literal syntax looks like the following:
 </tr>
 </table>
 
-As you can see, this literal takes in a number and returns a number - just as shown in the arrow function syntax! However, *we cannot call it* because it does not have a name! This is the same if you just typed `14` in your TypeScript file. That value is *never stored or accessible if we do not save it as a variable.*
+As you can see, this literal takes in a number and returns a number - just as shown in the arrow function syntax! 
+
+Calling such a function literal directly is possible, but rarely used in such a fashion:
+
+```ts
+((num: number): void => { console.log(num); })(423)
+```
+
+(When such a construct is useful is a bit beyond our concerns, but as a hint it is a clever tactic for avoiding introducing any identifiers into a scope, like globals, while still giving you an isolated scope of function execution. In other words, it's useful in scenarios where might want to define a function and call it exactly once without giving any susequent code the ability to call it again.)
+
+In a sense, it's similarly as infrequent to use as directly subscripting a string, such as:
+
+```ts
+"abcd"[Math.floor(Math.random() * 4)]
+```
 
 <table>
 <tr><th width="520">Values</th></tr>
@@ -229,21 +243,16 @@ As you can see, this literal takes in a number and returns a number - just as sh
 <td>
  
 ```ts
-14
-// ... this does nothing! We can never access this.
-
-let myNumber = 14;
-// Better! We can now use this number elsewhere.
-
 (num: number): number => {
  return num * 2;
 }
-// ... this does nothing! We can never access this.
+// ... this does nothing without calling it directly!
 
 let doubleNumber = (num: number): number => {
   return num * 2;
 }
-// Better! We can now use this function elsewhere.
+// Better! We can refer to this function definition 
+// and call it from elsewhere.
 ```
 
 </td>
@@ -254,7 +263,7 @@ Hopefully, you are able to see how we can *use functions as values* to assign to
 
 Lastly, remember that values always have a certain *data type* associated with them. Recall the table above - the `course` variable is of type `number`, the `name` variable is of type `string`, and the `yoda` variable is of type `Jedi`. So, *what type is `doubleNumber`*?
 
-The type annotations for function literals *are based on their inputs and output*. The type annotation has the following formula:
+The type annotations for function literals *are based on their parameter types and return type*. The type annotation has the following formula:
 
 `(param: type, param2: type, ...) => returnType`
 
@@ -344,7 +353,7 @@ Well, ***we can!*** Since *functions can be used as values, we can use them as *
 Recall how we implemented the `doubleNumber` function again. We could easily implement a few more functions like `doubleNumber` that would perform these other operations for us.
 
 <table>
-<tr><th width="520">Number Modifier Functions</th></tr>
+<tr><th width="520">Number Transform Functions</th></tr>
 <tr>
 <td>
  
@@ -451,19 +460,19 @@ This is super useful! As you can see, we modified our function to use the passed
 let numList: number[] = [0, 1, 4]
 
 // Double the number
-modifyNumbers(numList, doubleNumber);
+modifyNumbers(numList, doubleNumber)
 // Returns : [0, 2, 8]
 
 // Triple the number
-modifyNumbers(numList, tripleNumber);
+modifyNumbers(numList, tripleNumber)
 // Returns : [0, 3, 12]
 
 // Halve the number
-modifyNumbers(numList, halveNumber);
+modifyNumbers(numList, halveNumber)
 // Returns : [0, 0.5, 2]
 
 // Square the number
-modifyNumbers(numList, squareNumber);
+modifyNumbers(numList, squareNumber)
 // Returns : [0, 1, 16]
 ```
 
