@@ -309,18 +309,18 @@ I expect the following output:
 
 `[0, 4, 8, 16]`
 
-Using what you learned from the TypeScript tutorial, we can create this function by utilizing some array functionality. Let's create this function as an arrow function and call it `modifyNumbers()`. This function will take in an array of numbers (`numbers[]`) and return an array of numbers as well.
+Using what you learned from the TypeScript tutorial, we can create this function by utilizing some array functionality. Let's create this function as an arrow function and call it `mapNumbers()`. This function will take in an array of numbers (`numbers[]`) and return an array of numbers as well.
 
 Feel free to try to implement this on your own as practice first, or look at the code below:
 
 <table>
-<tr><th width="520">Implement `modifyNumbers`</th></tr>
+<tr><th width="520">Implement `mapNumbers`</th></tr>
 <tr>
 <td>
  
 ```ts
 /** Function that doubles the input number */
-let modifyNumbers = (nums: number[]): number[] => {
+let mapNumbers = (nums: number[]): number[] => {
 
  // Create an empty list of numbers
  let newNums: number[] = [];
@@ -344,9 +344,9 @@ let modifyNumbers = (nums: number[]): number[] => {
 
 We can now easily pass in an array of numbers, and it should return an array of numbers with all of its numbers doubled.
 
-However, ***what if we want to make `modifyNumbers` more multipurpose?*** *What if we wanted to have `modifyNumbers` also be able to triple a number? Halve a number? Square the number?*
+However, ***what if we want to make `mapNumbers` more multipurpose?*** *What if we wanted to have `mapNumbers` also be able to triple a number? Halve a number? Square the number?*
 
-We *could* rewrite the `modifyNumbers` function every single time, except that seems incredibly inefficient. *What if there was a way to pass in which function we wanted to modify each number with into the `modifyNumbers` function?* So for example, I could pass in `doubleNumber` if I wanted my function to double the numbers, or pass in `squareNumber` if I wanted to square each number.
+We *could* rewrite the `mapNumbers` function every single time, except that seems incredibly inefficient. *What if there was a way to pass in which function we wanted to modify each number with into the `mapNumbers` function?* So for example, I could pass in `doubleNumber` if I wanted my function to double the numbers, or pass in `squareNumber` if I wanted to square each number.
 
 Well, ***we can!*** Since *functions can be used as values, we can use them as **function parameters** too!*
 
@@ -386,10 +386,10 @@ let squareNumber: (num: number) => number = (num: number): number => {
 
 We now have many different functions that perform an operation on a specific input number! Despite it being messier and less readable, the functions above include their *type annotations*. If you notice, all of these functions have the same type annotation: `(num: number) => number`!
 
-Recall the header from our `modifyNumbers` function:
+Recall the header from our `mapNumbers` function:
 
 ```ts
-let modifyNumbers = (nums: number[]): number[] => { ... }
+let mapNumbers = (nums: number[]): number[] => { ... }
 ```
 
 The header for our function takes in *one* parameter currently - a list of numbers. We then perform operations with the inputted list of numbers. To specify this parameter, we just included a name and a *type annotation*.
@@ -397,36 +397,36 @@ The header for our function takes in *one* parameter currently - a list of numbe
 If we wanted to pass in a *function* in here, how would we add this into our function header?
 
 ```ts
-let modifyNumbers = (nums: number[], modifierFunction: (num: number) => number): number[] => { ... }
+let mapNumbers = (nums: number[], transformFunction: (num: number) => number): number[] => { ... }
 ```
 
-As you can see, this now would provide a new parameter called `modifierFunction` of type `(num: number) => number` that will enable us to pass in a function with that type annotation! 
+As you can see, this now would provide a new parameter called `transformFunction` of type `(num: number) => number` that will enable us to pass in a function with that type annotation! 
 
 To make our lives easier and make our code a lot more concise, we can also create a [*type alias*](https://github.com/unc-csxl/orientation/blob/main/frontend/typescript_tutorial.md#type-aliases) for our function's type! That will make it easier to type and more readable. If you are not familiar with type annotations, check out the TypeScript Tutorial docs to learn more.
  
 ```ts
-type NumberModifier = (num: number) => number
+type NumberTransformer = (num: number) => number
 ```
 
-Now, our new header for `modifyNumbers` would look like so:
+Now, our new header for `mapNumbers` would look like so:
 
 ```ts
-let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[] => { ... }
+let mapNumbers = (nums: number[], transformerFunction: NumberTransformer): number[] => { ... }
 ```
 
-Finally, let's implement our new `modifyNumbers` function!
+Finally, let's implement our new `mapNumbers` function!
 
 <table>
-<tr><th width="800">Implement `modifyNumbers` With Function Parameter</th></tr>
+<tr><th width="800">Implement `mapNumbers` With Function Parameter</th></tr>
 <tr>
 <td>
  
 ```ts
-/** Type alias for our number modifier functions */
-type NumberModifier = (num: number) => number
+/** Type alias for our number transformer functions */
+type NumberTransformer = (num: number) => number
 
 /** Function that modifies the input number */
-let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[] => {
+let mapNumbers = (nums: number[], transformerFunction: NumberTransformer): number[] => {
 
  // Create an empty list of numbers
  let newNums: number[] = [];
@@ -435,7 +435,7 @@ let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[]
   for(let num of nums) {
     // Modify the number
     // !! - We call the passed in function here!
-    let newNum = modifierFunction(num);
+    let newNum = transformerFunction(num);
     // Save the new number
     newNums.push(newNum);
   }
@@ -449,10 +449,10 @@ let modifyNumbers = (nums: number[], modifierFunction: NumberModifier): number[]
 </tr>
 </table>
 
-This is super useful! As you can see, we modified our function to use the passed in `modifierFunction` to actually modify each number in our array. Let's see our new `modifyNumbers` function in action:
+This is super useful! As you can see, we modified our function to use the passed in `transformerFunction` to actually transform each number in our array. Let's see our new `mapNumbers` function in action:
 
 <table>
-<tr><th width="520">Use the `modifyNumbers` Function</th></tr>
+<tr><th width="520">Use the `mapNumbers` Function</th></tr>
 <tr>
 <td>
  
@@ -460,19 +460,19 @@ This is super useful! As you can see, we modified our function to use the passed
 let numList: number[] = [0, 1, 4]
 
 // Double the number
-modifyNumbers(numList, doubleNumber)
+mapNumbers(numList, doubleNumber)
 // Returns : [0, 2, 8]
 
 // Triple the number
-modifyNumbers(numList, tripleNumber)
+mapNumbers(numList, tripleNumber)
 // Returns : [0, 3, 12]
 
 // Halve the number
-modifyNumbers(numList, halveNumber)
+mapNumbers(numList, halveNumber)
 // Returns : [0, 0.5, 2]
 
 // Square the number
-modifyNumbers(numList, squareNumber)
+mapNumbers(numList, squareNumber)
 // Returns : [0, 1, 16]
 ```
 
@@ -492,7 +492,7 @@ Recall a nifty design pattern from COMP 301 - the *factory* design pattern. The 
 
 **What if we can create a function that *generates* different functions depending on what number we want to multiply by?**
 
-That way, if we call our new function `generateMultiplyModifierFunction`, we ultimately can do the following:
+That way, if we call our new function `generateMultiplyTransformerFunction`, we ultimately can do the following:
 
 <table>
 <tr><th width="520">The Goal</th></tr>
@@ -503,17 +503,17 @@ That way, if we call our new function `generateMultiplyModifierFunction`, we ult
 let numList: number[] = [0, 1, 4]
 
 // Generates a function that doubles a number
-let doubleNumber: (num: number) => number = generateMultiplyModifierFunction(2);
+let doubleNumber: (num: number) => number = generateMultiplyTransformerFunction(2);
 
 // Double the numbers
-modifyNumbers(numList, doubleNumber);
+mapNumbers(numList, doubleNumber);
 // Returns : [0, 2, 8]
 
 // Generates a function that quadruples a number
-let quadrupleNumber: (num: number) => number = generateMultiplyModifierFunction(4);
+let quadrupleNumber: (num: number) => number = generateMultiplyTransformerFunction(4);
 
 // Quadruple the numbers
-modifyNumbers(numList, quadrupleNumber);
+mapNumbers(numList, quadrupleNumber);
 // Returns : [0, 4, 16]
 
 ```
@@ -522,31 +522,31 @@ modifyNumbers(numList, quadrupleNumber);
 </tr>
 </table>
 
-We know that our new function should *return* a function that is compatible with the parameter in `modifyNumbers`, which should be a function that inputs a number and returns a number. So, the return type signature should be `(num: number) => number`.
+We know that our new function should *return* a function that is compatible with the parameter in `mapNumbers`, which should be a function that inputs a number and returns a number. So, the return type signature should be `(num: number) => number`.
 
 From there, we also need an *input* to our generate function. This input is the *factor* by which we want to multiply.
 
-Let's create the skeleton of our `generateMultiplyModifierFunction` function!
+Let's create the skeleton of our `generateMultiplyTransformerFunction` function!
 
 <table>
-<tr><th width="520">`generateMultiplyModifierFunction` Header</th></tr>
+<tr><th width="520">`generateMultiplyTransformerFunction` Header</th></tr>
 <tr>
 <td>
  
 ```ts
 
-/** Generates a modifier function that takes in a number and
+/** Generates a tranformer function that takes in a number and
 returns the number multiplied by the factor. */
-let generateMultiplyModifierFunction = (factor: number): (num: number) => number => {
+let generateMultiplyTransformerFunction = (factor: number): (num: number) => number => {
  
 }
 
 /* NOTE: I will not use the type alias in the next examples to get you a bit more familiar
 * with the expanded syntax so you are able to recognize it if you see it. However, if it
 * helps to understand the input and output, here would be the function header using
-* the NumberModifer alias created in this line: `type NumberModifier = (num: number) => number`
+* the NumberTransformer alias created in this line: `type NumberTransformer = (num: number) => number`
 *
-* let generateMultiplyModifierFunction = (factor: number): NumberModifier => { ... }
+* let generateMultiplyTransformerFunction = (factor: number): NumberTransformer => { ... }
 */
 
 ```
@@ -563,7 +563,7 @@ Now, let's think about what we are actually trying to *return*. Let's think abou
 <td>
  
 ```ts
-generateMultiplyModifierFunction(2);
+generateMultiplyTransformerFunction(2);
 ```
 
 </td>
@@ -581,7 +581,7 @@ generateMultiplyModifierFunction(2);
  <td>
  
 ```ts
-generateMultiplyModifierFunction(5);
+generateMultiplyTransformerFunction(5);
 ```
 
 </td>
@@ -599,7 +599,7 @@ generateMultiplyModifierFunction(5);
  <td>
  
 ```ts
-generateMultiplyModifierFunction(0.5);
+generateMultiplyTransformerFunction(0.5);
 ```
 
 </td>
@@ -623,7 +623,7 @@ As you can see, there is a pattern emerging! Let's extrapolate such that we repl
 <td>
  
 ```ts
-generateMultiplyModifierFunction(factor);
+generateMultiplyTransformerFunction(factor);
 ```
 
 </td>
@@ -639,19 +639,19 @@ generateMultiplyModifierFunction(factor);
 </tr>
 </table>
 
-We have just found *what we want our function to return!* Let's finish implementing the `generateMultiplyModifierFunction` function.
+We have just found *what we want our function to return!* Let's finish implementing the `generateMultiplyTransformerFunction` function.
 
 <table>
-<tr><th width="520">`generateMultiplyModifierFunction` Implementation</th></tr>
+<tr><th width="520">`generateMultiplyTransformerFunction` Implementation</th></tr>
 <tr>
 <td>
  
 ```ts
-/** Generates a modifier function that takes in a number and
+/** Generates a transformer function that takes in a number and
 returns the number multiplied by the factor. */
-let generateMultiplyModifierFunction = (factor: number): (num: number) => number => {
+let generateMultiplyTransformerFunction = (factor: number): (num: number) => number => {
 
- // Return a modifier function that takes in a number and returns the number * factor
+ // Return a transformer function that takes in a number and returns the number * factor
  return (num: number): number => {
   return num * factor;
  }
@@ -662,7 +662,7 @@ let generateMultiplyModifierFunction = (factor: number): (num: number) => number
 </tr>
 </table>
 
-As you can see, this might be a bit confusing at first! Essentially though, our `generateMultiplyModifierFunction` just returns another function for us to use elsewhere.
+As you can see, this might be a bit confusing at first! Essentially though, our `generateMultiplyTransformerFunction` just returns another function for us to use elsewhere.
 
 Ultimately though, there are some pretty cool use cases for functions being able to generate other functions. While the syntax is a bit messy, using some TypeScript language features such as *type aliases* may help to make it easier to understand.
 
