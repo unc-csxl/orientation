@@ -1,7 +1,7 @@
 # Introduction to Higher Order Functions
 
 > Written by Ajay Gandecha and edited by Kris Jordan for the CSXL Web Application and for COMP 423: Foundations of Software Engineering.<br>
-> *Last Updated: 12/16/2023*
+> *Last Updated: 12/18/2023*
 
 ## Preface and Recap
 
