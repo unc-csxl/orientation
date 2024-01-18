@@ -195,6 +195,8 @@ As shown in the code above, TypeScript does not have a built-in *delete* method 
 
 TypeScript's arrays also have a `.pop()` method that removes the *last* item of an array. 
 
+To access the length of a TypeScript array, you can use the array's `length` field. For example, given an array `a`, the length of this array would be accessed using `a.length`.
+
 ### Conditionals
 
 Java and TypeScript have similar syntax for creating *conditional statements* and *if-statements*. 
