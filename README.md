@@ -12,6 +12,10 @@ This section contains resources relating to the frontend of the CSXL Web Applica
 
 This reading introduces the TypeScript programming language for those who just concluded a Java programming course (such as COMP 210 or COMP 301). Learn more about how TypeScript compares to Java in purpose, syntax, and language features.
 
+[**Introduction to Higher Order Functions**](https://github.com/unc-csxl/orientation/blob/main/frontend/higher_order_functions.md)
+
+This reading introduces higher order functions in the TypeScript programming language.
+
 ### Angular
 
 [**Crash Course on Angular Widgets**](https://github.com/unc-csxl/orientation/blob/main/angular/widgets.md)
