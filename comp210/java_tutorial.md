@@ -151,13 +151,13 @@ Let's compare a number declaration in Python and Java, then compare more general
  
 ```py
 # Declaring a number
-myNumber: int = 88
+my_number: int = 88
 
 # General Formula
 name: type = value
 
 # Reassign the variable
-myNumber = 100
+my_number = 100
 ```
 
 </td>
@@ -181,6 +181,147 @@ myNumber = 100;
 In Python, we put the *data type* after the `:` following the variable name. In Java, the data type always goes **first** and is *required* (unlike in Python, where you can omit it). When reassigning a variable already instantiated, however, the type is not repeated. 
 
 Also notice the use of the semicolon at the end of the line!
+
+Also, Java uses **camelCase** as convention for variable names rather than *snake_case*. So, when creating variable names with multiple words, the second word and on are capitalized, and words are not separated by *_*.
+
+### Working with Strings
+
+As you learned in the previous section, strings in Java are *objects*. In Java, we instantiate objects using the *`new`* keyword, the name of the class, and the parameters for its constructor. Here is the formula for insantiating objects:
+
+```java
+Type obj = new Type(inputA, inputB);
+```
+
+With this in mind, we can create a string like so:
+
+```java
+String welcomeMessage = new String("Welcome to COMP 110!");
+```
+
+Java also supports *string literal* syntax, which is far more common to use:
+
+```java
+String welcomeMessage = "Welcome to COMP 110!";
+```
+
+Notice that in Java, we use double quotes (`"`) rather than single quotes (`'`) to define strings like we did in Python. The use of both types of quotes is interchangeable in Python - it is **not** in Java! You must use double quotes.
+
+Since strings are objects in Java, there are many methods that you can call on strings to perform certain actions. Below are a few examples:
+
+<table>
+<tr><th width="520">Method</th><th width="520">Usage</th></tr>
+<tr></tr>
+<tr>
+<td>
+ 
+```java
+.length()
+```
+
+</td>
+ <td>
+
+This method is used to determine the number of characters in a string.
+
+**Example:**
+```java
+String name = "Ajay";
+name.length(); // Returns 4.
+```
+</td>
+</tr>
+
+<tr></tr>
+
+<tr>
+<td>
+ 
+```java
+.equals(otherString)
+```
+
+</td>
+ <td>
+
+This method is used to determine if two strings have the same sequence of characters.
+
+*NOTE: We cannot just use `==` to compare strings! Using `==` compares the *memory addresses* of strings and not their actual contents. So, when comparing strings, make sure to use `==`!*
+
+**Example:**
+```java
+String name = "Kaki";
+String otherName = "kaki";
+String finalName = "Kaki;
+
+name.equals(otherName); // Returns false.
+name.equals(finalName); // Returns true.
+```
+</td>
+</tr>
+
+<tr></tr>
+
+<tr>
+<td>
+ 
+```java
+.substring(startIndex, endIndex?)
+```
+
+</td>
+ <td>
+     
+This method is used to create a new string containing characters from a starting to, but not including, the ending index in a string.
+
+*NOTE: The ending index is optional (hence the `?`). Excluding it will just return a substring starting at `startingIndex` and ending at the end of the string.*
+
+**Example:**
+```java
+String name = "Kaki";
+name.substring(1); // Returns "aki".
+name.substring(0,2); // Returns "Ka".
+name.substring(0, name.length() - 1); // Returns "Kak".
+```
+</td>
+</tr>
+
+<tr></tr>
+
+<tr>
+<td>
+ 
+```java
+.indexOf(substring);
+```
+
+</td>
+ <td>
+     
+This method determines whether or not a substring is present in the string. If it is present, the starting index of the substring is returned. If it is not present, an index of `-1` is returned.
+
+**Example:**
+```java
+String name = "Kaki";
+name.indexOf("ki"); // Returns 2.
+name.indexOf("Ajay"); // Returns -1.
+```
+</td>
+</tr>
+
+</table>
+
+There are many other string methods, but these are the most common ones! To see a more complete list, check out [this link](https://www.w3schools.com/java/java_ref_string.asp).
+
+
+
+
+
+
+
+
+
+
+
 
 
 
