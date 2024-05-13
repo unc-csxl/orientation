@@ -122,6 +122,68 @@ Now that we have talked a little bit about the structure of a Java file and you 
 
 ## Syntax
 
+The syntax for Java is a little bit more verbose than Python, but code is more explicit (and therefore intentional). In this section, you will learn the syntax of Java code with the context of the Python syntax you have worked in throughout *COMP 110*.
+
+### Typing
+
+The first major distinction between Python and Java is its typing system. Recall the following from COMP 110:
+
+* **Primitive types** are a set of basic data types in a programming language. All other data types and classes can be constructed from these primitive types. Using standard programming conventions, primitive types are often denoted with an *all-lowercase* name and usually do not need to be imported.
+* **Reference types**, on the other hand, are all of the other types in a language. Reference types are defined as structures that contain or build upon the basic primitive types. Reference types are defined by *classes*. Reference types, like the name of all clases, often start with a capital letter (For example, `Dog` or `Cat`).
+
+In **Java**, we have the following *primitive* types:
+* `int`: Represents a number with no decimal places.
+* `double`: Represents a number that can store fractions (decimal places).
+* `boolean`: Represents a state that can either be `true` or `false`.
+
+Notice that *`string`* is **NOT** a primitive type! In Java, strings are represented as a reference type, and goes by the name `String`. This is because strings are *objects* that we can call methods on. We can only call methods on objects / reference types. Notice that in Python, this line is blurred. Java's type safety and langauge features keeps working with types more consistent.
+
+### Variable Declarations
+
+Now that you know a bit about the basic data types in Java, let's take a look at how to define **variables**.
+
+Let's compare a number declaration in Python and Java, then compare more generally.
+
+<table>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
+<tr>
+<td>
+ 
+```py
+# Declaring a number
+myNumber: int = 88
+
+# General Formula
+name: type = value
+
+# Reassign the variable
+myNumber = 100
+```
+
+</td>
+ <td>
+  
+```java
+// Declaring a number
+int myNumber = 88;
+
+// General Formula
+type name = value;
+
+// Reassign the variable
+myNumber = 100;
+```
+
+</td>
+</tr>
+</table>
+
+In Python, we put the *data type* after the `:` following the variable name. In Java, the data type always goes **first** and is *required* (unlike in Python, where you can omit it). When reassigning a variable already instantiated, however, the type is not repeated. 
+
+Also notice the use of the semicolon at the end of the line!
+
+
+
 - Variables
 - Types
 - Strings
@@ -137,182 +199,6 @@ Now that we have talked a little bit about the structure of a Java file and you 
 - Instantiating Objects
 
 ------
-
-The syntax for TypeScript is pretty succint and less verbose than Java! In this section, you will learn the syntax of TypeScript code with the context of the Java syntax you have worked in throughout *COMP 210* and *COMP 301*.
-
-### Typing
-
-The first major distinction between Java and TypeScript exists with its typing system. Recall the following:
-
-* **Primitive types** are a set of basic data types in a programming language. All other data types and classes can be constructed from these primitive types. Using standard programming conventions, primitive types are often denoted with an *all-lowercase* name and usually do not need to be imported.
-* **Reference types**, on the other hand, are all of the other types in a language. Reference types are defined as structures that contain or build upon the basic primitive types. Reference types are often defined by *interfaces*, *classes*, and *enumerations*. Reference types, like the name of all clases, often start with a capital letter (For example, `Dog` or `Cat`).
-
-In **Java**, we have the following *primitive* types:
-* `int`: Represents a number with no decimal places.
-* `double`: Represents a number that can store fractions (decimal places).
-* `boolean`: Represents a state that can either be `true` or `false`.
-
-In **TypeScript**, on the otherhand, we have **different** primitive types. TypeScript defines the following:
-* `number`: Represents a number that can store fractions (decimal places).
-* `boolean`: Represents a state that can either be `true` or `false`.
-* `string`: Represents a sequence of characters.
-
-Notice there is not a type distinction between *integers* and *floats / doubles*. We use `number` in TypeScript for both. This is helpful because it effectively allows us to work with double-floating point, 64-bit, values for all numerical computations.
-
-Second, notice that `string` is not capitalized in TypeScript. Technically, the string values we use wind up being references and realizations of the immutable `String` class in TypeScript/JavaScript, with its expected methods, but its type is specified with lowercase letters as a built-in.
-
-### Variable and Constant Declarations
-
-Now that you know a bit about the basic data types in TypeScript, let's take a look at how to define **variables**.
-
-Let's compare a number declaration in Java and TypeScript, then compare more generally.
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-// Declaring a Number
-int myNumber = 88;
-
-// General Formula
-type name = value;
-```
-
-</td>
- <td>
-  
-```ts
-// Declaring a Number
-let myNumber: number = 88;
-
-// General Formula
-let name: type = value;
-```
-
-</td>
-</tr>
-</table>
-
-As you can see, there are a few differences. First, in Java, we specify the data type *first*. In TypeScript, we provide a **type annotation *after*** the name of the variable. We also provide the `let` keyword before variable name.
-
-You can also notice the difference in types. In Java, we use the `int` primitive type. In TypeScript, we use `number` instead. Lastly, you can note that both Java and TypeScript use semicolons at the end of their lines.
-
-What if we wanted to make these values *constants* instead of variables (so that we cannot change their value later)?
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-// Declaring a Constant
-final int myNumber = 88;
-
-// General Formula
-final type name = value;
-```
-
-</td>
- <td>
-  
-```ts
-// Declaring a Constant
-const myNumber: number = 88;
-
-// General Formula
-const name: type = value;
-```
-
-</td>
-</tr>
-</table>
-
-As you can see, in Java, we use the `final` keyword to turn a variable into a constant. The keyword is appended to the front. In TypeScript however, we just use the `const` keyword ***instead of*** the `let` keyword!
-
-### Arrays
-
-The way that arrays work in Java and TypeScript are a bit different, and so is the syntax to create them.
-
-In Java, you probably remember that the length of an array cannot be changed once it is set - and that using `ArrayList<>` or any other subtype of `List` (imported from `java.utils.*`) provides this functionality!
-
-TypeScript arrays **are more similar to the Java `List` than to the Java array**. Creating arrays in TypeScript is also very similar to creating lists in Python. To declare an array in TypeScript, we can simply add `[]` to the end of a variable's *type annotation*, and use brackets to add initial values. Compare the following:
-
-<table>
-<tr><th width="213">Python</th><th width="213">Java</th><th width="213">TypeScript</th></tr>
-<tr>
-<td>
- 
-```py
-# Initialize
-names: list[str] = ["Aziz", "Andrew"]
-# Add values
-names.append("Jordan")
-# Replace a value
-names[2] = "Kris"
-# Remove a value
-names.remove("Kris") # Removes by value
-names.remove(1) # Removes by index
-# Access a value
-aziz = names[0]
-
-
-
-
-```
-
-</td>
- <td>
-
-  ```java
-// Initialize
-List<String> names = new ArrayList<>();
-names.add("Aziz");
-names.add("Andrew");
-// Add values
-names.add("Jordan");
-// Replace a value
-names.set("Kris", 2);
-// Remove a value
-names.remove("Kris"); // Removes by value
-names.remove(1); // Removes by index
-// Access a value
-String aziz = names.get(0);
-```
-
-</td>
-<td>
-
-```ts
-// Initialize
-let names: string[] = ["Aziz, "Andrew"]
-// Add values
-names.push("Jordan");
-// Replace a value
-names[2] = "Kris";
-// Remove a value
-names.splice(names.indexOf("Kris"), 1); // Removes by value
-names.splice(1, 1); // Removes by index
-// Access a value 
-let aziz: string = names[0];
-
-
-
-
-```
- 
-</td>
-</tr>
-</table>
-
-Just like in Python lists and traditional Java arrays (but unlike Java's `List`), we can index values of TypeScript arrays using the subscription `[]` syntax.
-
-As shown in the code above, TypeScript does not have a built-in *delete* method - but, it does have `.splice(i, n)`, which removes `n` number of elements *starting at index `i`*. So, we can combine this with `.indexOf()` to delete our value.
-
-TypeScript's arrays also have a `.pop()` method that removes the *last* item of an array. 
-
-To access the length of a TypeScript array, you can use the array's `length` field. For example, given an array `a`, the length of this array would be accessed using `a.length`.
 
 ### Conditionals
 
