@@ -33,9 +33,7 @@ Notice that both **lists** and **dictionaries** are two different "structures" t
 
 COMP 210 is called "Data Structures and Analysis". Most of you signed up for COMP 210 knowing it is the first class in the Computer Science major, but might not really know what this course aims to each! Let's break down COMP 210's official course description:
 
-```
-This course will teach you how to organize the data used in computer programs so that manipulation of that data can be done efficiently on large problems and large data instances. Rather than learning to use the data structures found in the libraries of programming languages, you will be learning how those libraries are constructed, and why the items that are included in them are there (and why some are excluded).
-```
+> This course will teach you how to organize the data used in computer programs so that manipulation of that data can be done efficiently on large problems and large data instances. Rather than learning to use the data structures found in the libraries of programming languages, you will be learning how those libraries are constructed, and why the items that are included in them are there (and why some are excluded).
 
 In computer science, the problems that we model can be *significantly* larger than just a small class roster or a cookie shop inventory. We can model entire company hierarchies, the US highway network, airports and plane travel - even processes that our computers run. As our problems grow larger and more complex, we *must* ensure that we model our data in a way that our computers can efficiently process. Computer chips can run billions of operations per second. However, if we do not model our data well, we might be doing unnecessary work - decreasing performance and wasting computing power in critical situations. Worse, if the way we model our data is extremely bad, we might not be able to solve these complex problems at all.
 
@@ -56,9 +54,87 @@ Java is particularly popular for building large-scale enterprise applications, A
 
 This document is designed to help you become familiar with the syntax and features of Java from the context of the Python experience you all have had in COMP 110! It compares the syntax between Python and Java in various situations and should serve as a guide going into COMP 210.
 
+## Structure of a Java Program
+
+Java is an **object oriented language**. Remember that in Python, you could write *scripts* that ran from top-to-bottom, and in those scripts, you could create *classes*. **In Java, every file defines a new class**! Remember from COMP 110 that classes define a new *type* and serves as a "blueprint" for *objects* of the new type. Classes do not run automatically; just like in Python, *objects* need to be created first.
+
+If every file in a Java program defines a new class, then how do we run any code?
+
+In Java, there is a special method called a **main method** that we can add to a class. The main method serves as the *entry point* of a pogram. By adding this method to a class in our program, we designate the code in the body of the *main method* to be the code that runs when we run our Java program. This method is defined with the following signature:
+
+```java
+public static void main(String[] args) {}
+```
+
+This code probably looks very scary to you if you have never seen Java before - do not worry! You will learn what all of this syntax means in a later section. For now, there are a few things to keep in mind. To highlight this, let's look at the most bare-bones Java program you can write - a `hello world` program!
+
+```java
+public class MyApp {
+
+  public static void main(String[] args) {
+    System.out.println("Hello, world!");
+  }
+}
+```
+
+This Java file defines a class called `MyApp`, which contains our `main` method! Therefore, the code inside of this method is what runs when we run our program.
+
+There are a lot of syntax differences that are apparent right away. Let's compare this code to what it would look like in Python:
+
+<table>
+<tr><th width="520">Java</th><th width="520">Python</th></tr>
+<tr>
+<td>
+ 
+```java
+public class MyApp {
+
+  public static void main(String[] args) {
+    System.out.println("Hello, world!");
+  }
+}
+```
+
+</td>
+ <td>
+  
+```py
+class MyApp:
+
+  @staticmethod
+  def main(args: list[str]): None:
+    print('Hello, world!')
+```
+
+</td>
+</tr>
+</table>
+
+You may begin to notice a few differences:
+* In Python, we use a `:` after headers / definitions (like `class MyApp`), and then all of the code *inside* of the definition are indented. In Java, we instead surround all code inside of the definition with curly brackets `{ }`.
+* In Python, we define functions / methods using `def`. In Java, we do not use a special keyword to define functions. Intead, we place the *data type* we expect to return first! In functions that do not return anything, we use the return type of `void` in Java. This is why the method header has `void main()`. In Python, the return type is placed afterwards, in `def main(...): None`.
+* This also applies to arguments! Notice that in Python, we define the argument `args` as `(args: list[str])`. In Java, we put the data type first: `(String[] args)`. Notice that instead of `list[..type..]`, in Java we use `..type..[]`. This comes with more nuance, as these are not entirely equivalent data structures. We will talk about this later!
+* Print looks different! In Python, `print` is built into the language, so we can call it as `print(text)`. In Java, the `println()` function is part of the `System.out` Java library. This is already available to us and we do not need to import it directly, but we still need to call the function using `System.out.println(text)`.
+* Do not worry about the specifics with access modifiers (`public`) and the `static` keyword if you have not learned it already - we will talk about this later!
+* Notice that in Java, **semicolons are required after every statement**! This does not apply to after curly brackets or headers, but it does apply to executable code *within* `{ }`.
+
+Now that we have talked a little bit about the structure of a Java file and you have seen Java for the first time, we can begin to discuss Java's syntax.
+
 ## Syntax
 
-The syntax for Java seems a lot 
+- Variables
+- Types
+- Strings
+- Conditionals
+- Loops
+- Functions
+
+## Extra Features
+- Comments
+
+## Class Construction Syntax
+- Class, constructor, fields, methods
+- Instantiating Objects
 
 ------
 
