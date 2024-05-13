@@ -39,9 +39,9 @@ In computer science, the problems that we model can be *significantly* larger th
 
 COMP 210 gives you a toolbox of such *data structures* - different ways that you can model problems and situations in code. It also teaches you the foundations of *time complexity* - determining *how efficient* your code is, and how you can make it better (through restructuring code).
 
-To support this effort, and in many other classes after this, COMP 210 switches out of the world of Python and introduces the **Java** programming language.
+To support this effort, like many other classes after this, COMP 210 switches out of the world of Python and introduces the **Java** programming language.
 
-Java is a **statically typed language**, which means that variable *types* are explicit and do not change once the variable is created, unlike Python is *dynamically* typed. Static typing provides *type safety*. Java will throw type errors if things go wrong with types in your code (such as types being converted incorrectly, or data being replaced with data of a different type). This may seem annoying at first, but in larger, more complex programs, this safeguard is *essential* to ensure your code is working as expected.
+Java is a **statically typed language**, which means that variable *types* are explicit and do not change once the variable is created, unlike Python which is *dynamically* typed. Static typing provides *type safety*. Java will throw type errors if things go wrong with types in your code (such as types being converted incorrectly, or data being replaced with data of a different type). This may seem annoying at first, but in larger, more complex programs, this safeguard is *essential* to ensure your code is working as expected.
 
 Java is used in many classes in our department, including (but not limited to):
 * COMP 210: Data Structures and Analysis (this course!)
@@ -115,7 +115,7 @@ You may begin to notice a few differences:
 * In Python, we define functions / methods using `def`. In Java, we do not use a special keyword to define functions. Intead, we place the *data type* we expect to return first! In functions that do not return anything, we use the return type of `void` in Java. This is why the method header has `void main()`. In Python, the return type is placed afterwards, in `def main(...) -> None`.
 * This also applies to arguments! Notice that in Python, we define the argument `args` as `(args: list[str])`. In Java, we put the data type first: `(String[] args)`. Notice that instead of `list[..type..]`, in Java we use `..type..[]`. This comes with more nuance, as these are not entirely equivalent data structures. We will talk about this later!
 * Print looks different! In Python, `print` is built into the language, so we can call it as `print(text)`. In Java, the `println()` function is part of the `System.out` Java library. This is already available to us and we do not need to import it directly, but we still need to call the function using `System.out.println(text)`.
-* Do not worry about the specifics with access modifiers (`public`) and the `static` keyword if you have not learned it already - we will talk about this later!
+* Do not worry about the specifics with access modifiers (`public`) and the `static` keyword if you have not learned it already - we will talk about this later in COMP 210.
 * Notice that in Java, **semicolons are required after every statement**! This does not apply to after curly brackets or headers, but it does apply to executable code *within* `{ }`.
 
 Now that we have talked a little bit about the structure of a Java file and you have seen Java for the first time, we can begin to discuss Java's syntax.
@@ -182,7 +182,7 @@ In Python, we put the *data type* after the `:` following the variable name. In 
 
 Also notice the use of the semicolon at the end of the line!
 
-Also, Java uses **camelCase** as convention for variable names rather than *snake_case*. So, when creating variable names with multiple words, the second word and on are capitalized, and words are not separated by *_*.
+Also, Java uses **camelCase** as convention for variable names rather than *snake_case*. So, when creating variable names with multiple words, the second word and after are capitalized, and words are not separated by *_*.
 
 ### Working with Strings
 
@@ -346,7 +346,7 @@ a == b // equals
 
 In Python, we represent truth values as `True` and `False`. In Java, these are lowercased as `true` and `false`.
 
-Additionally, following in the C-family heritage, Java has a feature called short-circuit evaluation, which is used by the `&&` and `||` operators. If the left-hand expression of an `&&` operator is `false`, the right-hand expression will not be evaluated. Conversely, if the left-hand expression of an `||` operator is `true`, then the right-hand expression will not be evaluated.
+Additionally, Java has a feature called short-circuit evaluation, which is used by the `&&` and `||` operators. If the left-hand expression of an `&&` operator is `false`, the right-hand expression will not be evaluated. Conversely, if the left-hand expression of an `||` operator is `true`, then the right-hand expression will not be evaluated.
 
 Here is the syntax for **if-statements**:
 
@@ -418,7 +418,7 @@ while (conditionA) {
 
 ### For Loops
 
-In Java, there are two types of `for` loops. The first `for` loop functions similarly to the `for i in range(...)` loop in Python, where it creates a locally-scoped variable that increments through a range. Here is an example:
+In Java, the `for` loop functions similarly to the `for i in range(...)` loop in Python, where it creates a locally-scoped variable that increments through a range. Here is an example:
 
 <table>
 <tr><th width="520">Python</th><th width="520">Java</th></tr>
@@ -452,7 +452,7 @@ for (variable declaration; conditional; step) {}
 
 The *variable declaration* creates the counter `i` variable of type `int` and gives it a starting value of `0`. Then, we supply a *conditional*. Our loop will continue to run until this conditional turns `false`. Then, the final *step* part tells the program how to update the `i` variable after each iteration.
 
-In Java, `i++` is shorthand for `i +=1`.
+In Java, `i++` is shorthand for `i += 1`.
 
 So, this loop creates a variable `i`, increments until `i` is no longer less than `10`, and after each iteration, `i` is incremented by `1`.
 
@@ -462,7 +462,7 @@ This type of for-loop is quite common, and it is helpful to get used to this syn
 
 Functions are the most fundamental abstraction technique we use in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In Python, you worked in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction: methods are called on an object (e.g. `object.method()`) whereas functions are generally called standalone `function()`. In Java, we work with methods only, since all of our code is contained within classes.
 
-Let's compare the function definition syntax of Python and Java.
+Let's compare the function / method definition syntax of Python and Java.
 
 <table>
 <tr><th width="520">Python</th><th width="520">Java</th></tr>
@@ -486,7 +486,7 @@ String greet(String name) {
 </tr>
 </table>
 
-You will notice a few common themes throughout a lot of these syntax differences. In Java, we do not use `def` to create functions - instead, the *return type* of the function goes first! If there is no return type for a function, you must write `void` as the return type, like so:
+You will notice a few common themes throughout a lot of these syntax differences. In Java, we do not use `def` to create methods - instead, the *return type* of the method goes first! If there is no return type for a method, you must write `void` as the return type, like so:
 
 <table>
 <tr><th width="520">Python</th><th width="520">Java</th></tr>
@@ -512,14 +512,14 @@ void doSomething() {
 
 In parameter definitions, the type also goes first in Java.
 
-### Extra TypeScript Features
+### Extra Java Features
 
 #### Comments
 
 The examples throughout this document have already used many comments, however here is how we write comments in Java!
 
 <table>
-<tr><th width="520">Python</th><th width="520">Jaca</th></tr>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
 <tr>
 <td>
  
