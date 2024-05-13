@@ -1,4 +1,4 @@
-# Java For the COMP 110 Java Developer
+# Java For the COMP 110 Python Developer
 
 > Written by Ajay Gandecha for COMP 210: Data Structures and Analysis.<br>
 > *Last Updated: 5/13/2024*
