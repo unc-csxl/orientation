@@ -102,7 +102,7 @@ public class MyApp {
 class MyApp:
 
   @staticmethod
-  def main(args: list[str]): None:
+  def main(args: list[str]) -> None:
     print('Hello, world!')
 ```
 
@@ -112,7 +112,7 @@ class MyApp:
 
 You may begin to notice a few differences:
 * In Python, we use a `:` after headers / definitions (like `class MyApp`), and then all of the code *inside* of the definition are indented. In Java, we instead surround all code inside of the definition with curly brackets `{ }`.
-* In Python, we define functions / methods using `def`. In Java, we do not use a special keyword to define functions. Intead, we place the *data type* we expect to return first! In functions that do not return anything, we use the return type of `void` in Java. This is why the method header has `void main()`. In Python, the return type is placed afterwards, in `def main(...): None`.
+* In Python, we define functions / methods using `def`. In Java, we do not use a special keyword to define functions. Intead, we place the *data type* we expect to return first! In functions that do not return anything, we use the return type of `void` in Java. This is why the method header has `void main()`. In Python, the return type is placed afterwards, in `def main(...) -> None`.
 * This also applies to arguments! Notice that in Python, we define the argument `args` as `(args: list[str])`. In Java, we put the data type first: `(String[] args)`. Notice that instead of `list[..type..]`, in Java we use `..type..[]`. This comes with more nuance, as these are not entirely equivalent data structures. We will talk about this later!
 * Print looks different! In Python, `print` is built into the language, so we can call it as `print(text)`. In Java, the `println()` function is part of the `System.out` Java library. This is already available to us and we do not need to import it directly, but we still need to call the function using `System.out.println(text)`.
 * Do not worry about the specifics with access modifiers (`public`) and the `static` keyword if you have not learned it already - we will talk about this later!
@@ -394,11 +394,11 @@ There is no combined `elif` keyword in Java like there is in Python. Instead, we
 Just like with if-statements, both Python and Java have the same differences for while-loops! We use parenthesis around the conditional in loops too.
 
 <table>
-<tr><th width="520">Python</th><th width="520">Kava</th></tr>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
 <tr>
 <td>
  
-```java
+```py
 while condition_a:
  # Some code here!
 ```
@@ -418,508 +418,124 @@ while (conditionA) {
 
 ### For Loops
 
-
-
-
-
-
-
-- Variables
-- Types
-- Strings
-- Conditionals
-- Loops
-- Functions
-
-## Extra Features
-- Comments
-
-## Class Construction Syntax
-- Class, constructor, fields, methods
-- Instantiating Objects
-
-------
-
-### Conditionals
-
-Java and TypeScript have similar syntax for creating *conditional statements* and *if-statements*. 
-
-TypeScript uses the same **boolean operators** that Java does. This means that `&&` represents *AND*, `||` represents *OR*, and `!` represents *NOT*. TypeScript and Java both use the lowercased `true` and `false` for boolean values.
-
-Additionally, following in the C-family heritage, the `&&` and `||` operators are short-circuiting. If the left-hand expression of an `&&` operator is `false`, the right-hand expression will not be evaluated. Conversely, if the left-hand expression of an `||` operator is `true`, then the right-hand expression will not be evaluated. This matters when the right-hand expression contains a function or method call that mutates state.
-
-Coming from Java, one surprising feature of JavaScript and TypeScript is the notion of _truthiness_. You can learn more about [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) values on MDN, a great documentation resource for front-end web concerns. Many values besides the boolean value `true` are treated as `true`/"truthy" in boolean contexts in JavaScript. For example, any non-empty strings and any non-zero numbers are considered "truthy" in boolean contexts. This means you can write a valid, type safe expression like `"foo" || ""`. Surprisingly, the `||` operator evaluates to its first truthy value, so `"foo" || ""`, `"" || "foo"`, and `"foo" || "bar"` all evaluate to `"foo"`, not `true`. This is handy and commonly used in variable initialization statements, such as `let initialValue: string = userInput || "Default Value";`
-
-If-statements have the ***same syntax and usage*** as they do in Java!
+In Java, there are two types of `for` loops. The first `for` loop functions similarly to the `for i in range(...)` loop in Python, where it creates a locally-scoped variable that increments through a range. Here is an example:
 
 <table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
 <tr>
 <td>
  
-```java
-if (conditionA || conditionB) {
- // Some code here!
-}
-else {
- // Some code here.
-}
+```py
+for i in range(0, 10):
+  print(i)
 ```
 
 </td>
  <td>
   
-```java
-if (conditionA || conditionB) {
- // Some code here!
-}
-else {
- // Some code here.
-}
-```
-
-</td>
-</tr>
-</table>
-
-> **NOTE:** Both Java and TypeScript require the use of parenthesis `( )` around the conditional statements in if-statements.
-
-### Loops
-
-#### The `while` Loop
-
-Just like with if-statements, both Java and TypeScript use the same syntax for while loops! We use parenthesis around the conditional in both languages. 
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-while (conditionA) {
- // Some code here!
-}
-```
-
-</td>
- <td>
-  
-```java
-while (conditionA) {
- // Some code here!
-}
-```
-
-</td>
-</tr>
-</table>
-
-### The `for` Loop
-
-In both Java and TypeScript, there are two types of loops that both serve distinct purposes.
-
-The first type of loop contains a counter variable that is modified each time the the loop iterates - and, iteration stops when some provided condition evaluates to false. This type of loop exists in ***both*** Java and TypeScript. The code is *nearly* identical, but notice that in the TypeScript version, we need to use our new method of creating variables. We do not say `int i = 0;`, instead we say `let i = 0;`. We can see this here:
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
 ```java
 for(int i = 0; i < 10; i++) {
- // Loop body here...
+  System.out.println(i);
 }
 ```
-
-</td>
- <td>
-  
-```ts
-for(let i = 0; i < 10; i++) {
- // Loop body here...
-}
-```
-
 </td>
 </tr>
 </table>
 
-> **NOTE:** In this example, notice how we do not include the type annotation on the conditional variable. In general, type annotations on variables in TypeScript are not necessary by default. TypeScript infers types of variables when there is no explicit type annotation provided. However, including them is ***strongly encouraged***. In this case, for conciseness in the for loop header body and the the fact that the variable's type is guaranteed to be `number`, it can be omitted here.
+Both of these code snippets print `0` through `9`! The syntax for this type of loop in Java is expanded, but it helps to give a better sense of what is going on.
 
-The second type of loop in Java allows you to *iterate over a collection*, where a variable is updated with a value corresponding to the current iteration. This is often the most widely-used loop. There are syntactical differences here between Java and TypeScript, both in the *keywords used* and the variable creation convention.
+This type of loop in Java has three parts:
 
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
 ```java
-for(String name : names) {
- // Loop body here...
-}
+for (variable declaration; conditional; step) {}
 ```
 
-</td>
- <td>
-  
-```ts
-for(let name of names) {
- // Loop body here...
-}
-```
+The *variable declaration* creates the counter `i` variable of type `int` and gives it a starting value of `0`. Then, we supply a *conditional*. Our loop will continue to run until this conditional turns `false`. Then, the final *step* part tells the program how to update the `i` variable after each iteration.
 
-</td>
-</tr>
-</table>
+In Java, `i++` is shorthand for `i +=1`.
 
-As you can see, like in previous examples, TypeScript uses the `let` keyword. In addition, Java uses `:`, while TypeScript uses `of`.
+So, this loop creates a variable `i`, increments until `i` is no longer less than `10`, and after each iteration, `i` is incremented by `1`.
+
+This type of for-loop is quite common, and it is helpful to get used to this syntax, as it is used in other languages as well.
 
 ### Defining Functions
 
-Functions are the most fundamental abstraction technique we use in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In TypeScript, we also mainly work in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction: methods are called on an object (e.g. `object.method()`) whereas functions are generally called standalone `function()`. This distinction has some nuance in more advanced uses of TypeScript/JavaScript, but is generally how you should approach it.
+Functions are the most fundamental abstraction technique we use in software engineering. It is important to note that in Java, we create *methods*, which are functions that are members of a *class*. In Python, you worked in the context of classes, but we are not necessarily required to. So, if you are hearing the term "functions" and "methods" passed around, it is useful to remember this distinction: methods are called on an object (e.g. `object.method()`) whereas functions are generally called standalone `function()`. In Java, we work with methods only, since all of our code is contained within classes.
 
-There are many fundamental differences in the syntax for creating functions in Java and TypeScript. Let's take a look at an example of a function that takes in a user's name and returns a string that greets the user.
+Let's compare the function definition syntax of Python and Java.
 
 <table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
 <tr>
 <td>
  
+```py
+def greet(name: str) -> str:
+  return 'Welcome, ' + name + '!'
+```
+
+</td>
+ <td>
+  
 ```java
 String greet(String name) {
  return "Welcome, " + name + "!";
 }
 ```
-
-</td>
- <td>
-  
-```ts
-function greet(name: string): string {
- return "Welcome, " + name + "!";
-}
-```
-
 </td>
 </tr>
 </table>
 
-There are a few noticeable differences. First, TypeScript uses the `function` keyword at the front rather than specifying a return type first. Also, the *type annotation* is at the end of the function header (and before the body). The placement of type annotations for the *function parameters* also changes here.
-
-In the case that a function returns nothing, note that in Java, we specify the return type to be `void`. We can do this in TypeScript too, however it is optional. Both including `: void` or not is valid. For example:
+You will notice a few common themes throughout a lot of these syntax differences. In Java, we do not use `def` to create functions - instead, the *return type* of the function goes first! If there is no return type for a function, you must write `void` as the return type, like so:
 
 <table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
 <tr>
 <td>
  
+```py
+def do_something() -> None:
+  # Do something
+```
+
+</td>
+ <td>
+  
 ```java
 void doSomething() {
- // Implementation Not Shown
-}
-
-
-
-
-
-
-
-
-```
-
-</td>
- <td>
-  
-```ts
-function doSomething() {
- // Implementation Not Shown
-}
-
-// OR
-
-function doSomething(): void {
- // Implementation Not Shown
+  // Do something
 }
 ```
-
 </td>
 </tr>
 </table>
 
-### Arrow Functions
-
-TypeScript also has a tremendously useful feature called **arrow functions**. Arrow functions are a more compact and concise method of defining traditional functions. Let's take a look at a function from above as a *traditional function* and one as an *arrow function*.
-
-<table>
-<tr><th width="520">TypeScript - Traditional Function</th><th width="520">TypeScript - Arrow Function</th></tr>
-<tr>
-<td>
- 
-```ts
-function greet(name: string): string {
- return "Welcome, " + name + "!";
-}
-```
-
-</td>
- <td>
-  
-```ts
-let greet = (name: string): string => {
- return "Welcome, " + name + "!";
-}
-```
-
-</td>
-</tr>
-</table>
-
-There are a few things to unpack here. First, it looks like we are ultimately assigning *"something"* to a *variable.* We use the `let` keyword and we provide a variable name! On the right, we have a weird structure that would go in the *value* spot of our variable formula.
-
-In fact, this is exactly what we are doing! We are saving a *function* to a variable and giving it a name that we can use to call it. In the `( )`, we provide the parameters to the function. We provide a return type in the type annotation as well. Then, we use `=>` to connect these parameters to a *function body*.
-
-We can then call our function in the same way we would normally, like so:
-```ts
-greet("Jade");
-```
-
-While this seems like just a syntactic change, the implications of this are ***massive*** and opens the door to an entire new world of programming called **functional programming**, as we can pass around functions as values. This is something that we will be covering *extensively* throughout this course, however it is super important to become familiar with the arrow function syntax now so it is less suprising later!
-
-To conclude this section, provide two important caveats must be emphasized:
-* Arrow functions don't have their own `this` bindings and therefore should not be used when defining methods of a class.
-* Arrow functions cannot be used as constructors. Calling them with `new` throws a `TypeError`.
-
-These caveats are important to note because traditional functions and arrow functions are not *exactly* the same, and there are some semantic differences.
-
-### Class and Interface Construction
-
-**Classes** define data types and are the foundation of object-oriented programming. It will be critical for you to be comfortable working within TypeScript classes throughout your time in COMP 423! While there are many syntax differences between classes in Java and TypeScript, the *core idea* and motivation for using them remains the same. Below is an example of a full class in both Java and TypeScript. I recommend that you read this in its entirely and try to compare line by line! From there, we will go through each section.
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-/** Represents a UNC Student. */
-public class Student {
-
- /* Fields
- * NOTE: In COMP 301, you learned about using the
- * `private` keyword on fields to control access
- * via getter and setter methods. For this example,
- * I am making some fields public and others private.
- */
-
- /** Represents the name of the student */
- public String name;
- /** Represents the year of the student*/
- public int year;
- /** Represents the address of the student */
- private String address;
-
- /* Constructor */
- public Student(String name, int year, String adr) {
-  this.name = name;
-  this.year = year;
-  this.address = adr;
-
-  this.welcome();
- }
-
- /* Methods */
-
- /** Prints a welcome message to the console. */
- public void welcome() {
-  System.out.println("Hello, " + this.name + "!");
- }
-
- /** Converts a year number to a description. */
- public static String yearToString(int year) {
-  if(year == 1) {
-   return "Freshman";
-  }
-  else if(year == 2) {
-   return "Sophomore";
-  }
-  else if(year == 3) {
-   return "Junior";
-  }
-  else if(year == 4) {
-   return "Senior";
-  }
-
-  return "Oops...";
- }
-}
-```
-
-</td>
- <td>
-  
-```ts
-/** Represents a UNC Student. */
-public class Student {
-
- /* Fields
- * NOTE: In COMP 301, you learned about using the
- * `private` keyword on fields to control access
- * via getter and setter methods. For this example,
- * I am making some fields public and others private.
- */
-
- /** Represents the name of the student */
- public name: string;
- /** Represents the year of the student*/
- public year: number;
- /** Represents the address of the student */
- private address: string;
-
- /* Constructor */
- constructor(name: string, year: int, adr: string) {
-  this.name = name;
-  this.year = year;
-  this.address = adr;
-
-  this.welcome();
- }
-
- /* Methods */
-
- /** Prints a welcome message to the console. */
- public welcome() {
-  console.log("Hello, " + this.name + "!");
- }
-
- /** Converts a year number to a description. */
- public static yearToString(year: number): string {
-  if(year == 1) {
-   return "Freshman";
-  }
-  else if(year == 2) {
-   return "Sophomore";
-  }
-  else if(year == 3) {
-   return "Junior";
-  }
-  else if(year == 4) {
-   return "Senior";
-  }
-
-  return "Oops...";
- }
-}
-```
-
-</td>
-</tr>
-</table>
-
-As you can see, there are a few similarities between classes in Java and TypeScript! First, we can look at *access modifiers*. The `public`, `private`, and `protected` keywords are the ***same*** in both Java and TypeScript.
-
-Notice that the fields are the same conventions as well! Note however that the `let` keyword is ***not used*** when defining fields - it is only needed when defining regular variables.
-
-The constructor also differs a bit. In TypeScript, the `constructor` keyword replaces `public ClassName` from Java! The type annotations in the parameters also follow the normal conventions of TypeScript functions.
-
-Lastly, like fields, *methods* in TypeScript also do ***not*** use their respective keyword (`function`) to be defined. Instead, we can just provide an access modifier.
-
-We use the `static` keyword to denote class methods the same way in both Java and TypeScript. Learn more about class fields and methods [here](https://www.tutorialsteacher.com/typescript/typescript-static).
-
-Within a function, we also have access to the `this` keyword that references the current object.
-
-Now, how do we ***instantiate*** objects?
-
-We actually use the same syntax as in Java:
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-Student noah = new Student("Noah", 3, "Columbia St");
-```
-
-</td>
- <td>
-  
-```ts
-noah: Student = new Student("Noah", 3, "Columbia St");
-```
-
-</td>
-</tr>
-</table>
-
-We can also define interfaces in TypeScript like we do in Java. Take a look at the following:
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-public interface Person {
- String name;
-}
-
-public class Student implements Person { /* ... */ }
-```
-
-</td>
- <td>
-  
-```ts
-public interface Person {
- name: string;
-}
-
-public class Student implements Person { /* ... */ }
-```
-
-</td>
-</tr>
-</table>
-
-As you can see, the keywords remain the same between both languages with `interface` and `implements`! The only difference between the two languages are with variable creation and type annotation conventions.
-
-There is also another interesting feature of TypeScript worth mentioning here.
-
-TypeScript employs ***structural type checking***. This means that TypeScript views objects as equivalent types *if they share the same structure*, NOT just the same name! On the otherhand, Java is a ***nominally type language***, which means it views objects as equivalent types if they share the same name ONLY (or if there is an inheritence relationship).
-
-So, we can *technically* directly create a value of type `Person` in TypeScript! This is not something you can directly do in Java without creating a subclass. The syntax would look like so:
-
-<table>
-<tr><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```ts
-let person: Person = {
- name: "Charles"
-};
-```
-
-</td>
-</tr>
-</table>
-
-In this example, we use JSON (JavaScript object notation) to *create an object of data* that contains the *same properties* that a `Person` objct should have. Suprisingly enough, due to TypeScript being a structural language, this ***is a valid way to instantiate an object, technically of type object, that can used anywhere an object of type `Person` is expected without explicitly implementing the `Person` interface!***
-
-This feature is often called "duck typing", thanks to the addage "if it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck." TypeScript and structural typing take it further: "if it's a goose that looks like a duck, then it's a duck." In programming, structural type checking like TypeScript's, relaxes the strictness of nominal typing like Java's, by embracing the idea that _if an object has all the same fields and methods needed as some other type_, then it's probably OK to treat it as that other type.
+In parameter definitions, the type also goes first in Java.
 
 ### Extra TypeScript Features
 
 #### Comments
 
-The examples throughout this document have already used many comments, however we create comments in Java and TypeScript in the exact same way! This is shown below:
+The examples throughout this document have already used many comments, however here is how we write comments in Java!
 
 <table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
+<tr><th width="520">Python</th><th width="520">Jaca</th></tr>
 <tr>
 <td>
  
-```java
+```py
+# This is a single-line comment.
+
+"""
+This is an example of a
+multi-line comment!
+"""
+```
+
+</td>
+ <td>
+  
+```ts
 // This is a single-line comment.
 
 /*
@@ -929,308 +545,9 @@ multi-line comment!
 ```
 
 </td>
- <td>
-  
-```ts
-// This is a single-line comment.
-
-/*
-This is an example of a
-multi-line comment!
-*/
-```
-
-</td>
 </tr>
 </table>
-
-#### Printing Values
-
-In Java and TypeScript, we have statements to print out values! In TypeScript, values are printed to the *console*. We use the following convention to print values:
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-String taName = "Jean";
-System.out.println(taName);
-// Output:
-// >> Jean
-```
-
-</td>
- <td>
-  
-```ts
-let taName: string = "Jean";
-console.log(taName);
-// Console:
-// >> Jean
-```
-
-</td>
-</tr>
-</table>
-
-As you can see, we use `console.log()` to print out values to the console in TypeScript. To see values printed to `console.log()` in a browser, you will need to open your browser's developer tools and view its console tabl.
-
-#### Enums
-
-Enums (enumerators) are an extremely useful language feature in many programming languages! Enums allow you to define custom, related values or states. Think of enums as implementing a multiple-choice question, where there are many options! Let's look at an example:
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
- <td>
- 
-```java
-enum Direction {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT,
-}
-```
-
-</td>
-<td>
- 
-```ts
-enum Direction {
-  Up,
-  Down,
-  Left,
-  Right,
-}
-```
-
-</td>
-</tr>
-</table>
-
-As you might notice, creating enums in TypeScript is nearly equivalent to its Java counterpart that you saw in COMP 301! The main difference is that it is convention for Java enum options to be entirely  *capitalized*, while TypeScript enum options only have their *first letter capitalized.*
-
-Let's look at the `Direction` enum applied in a TypeScript function:
-
-<table>
-<tr><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```ts
-function directionToText(direction: Direction): string {
- if(direction == Direction.Up || direction == Direction.Down) {
-  return "Let's go vertically!"
- }
- else if (direction == Direction.Left || direction == Direction.Right) {
-  return "Let's go horizontally!"
- }
-}
-```
-
-</td>
-</tr>
-</table>
-
-Enumerations will be extremely useful in your final projects to model data.
-
-#### Type Aliases
-
-There is a nifty feature in TypeScript called the **type alias**, which essentially allows you to create another label by which you can refer to a type. This can be useful to make types more concise, or to make it more readable for your feature. Look at the following example:
-
-<table>
-<tr><th width="520">TypeScript</th></tr>
-<tr>
-<td>
-
-```ts
-type Rating = number;
- 
-let csxlRating: Rating = 10;
-```
-
-</td>
-</tr>
-</table>
-
-Using the `type` keyword, we give `number` an alias as `Rating`. Now, we can use `number` and `Rating` interchangeably. Next, we create a variable called `csxlRating` of type `Rating` (which is really just type `number`), and then assign a number to it.
-
-#### Ternary Operator
-
-The last super useful feature of TypeScript to feature in this document is the **ternary operator**. The ternary operator allows you to write a *conditional expression*. Unlike the `if`/`else` syntax in TypeScript and Java, which are statements, the ternary operator results in an expression. This means that if a condition is `true`, the expression can evaluate to one value and if it's `false`, another.
-
-The ternary operator uses the following syntax:
-`condition ? expr_if_true : expr_if_false`
-
-Let's look at an example relating to the CSXL site:
-
-<table>
-<tr><th width="520">TypeScript</th></tr>
-<tr>
-<td>
-
-```ts
-// Stores the hour which the CSXL opens.
-// For sake of example, say the CSXL opens at 10am on weekdays and 12pm on weekends:
-let csxlOpeningHour: number = isWeekday ? 10 : 12;
-
-console.log(csxlOpeningHour);
-
-// Output IF isWeekday = true:
-// >> 10
-// Output IF isWeekday = false:
-// >> 12
-
-// Since the ternary operator produces an expression, it can
-// also be used like:
-console.log(isWeekday ? "Weekday" : "Weekend")
-```
-
-</td>
-</tr>
-</table>
-
-This is the same syntax that is used in Java! Ternary operators are *extremely useful* and are used numerous times throughout the CSXL application. I highly recommend checking out the codebase and searching for `?` / `:` to see more relevant examples!
-
-#### Generic Types
-
-**Generic types** are a powerful convention in Java that allows you to pass types *as a parameter* into objects. This makes objects support multiple data types.
-
-For example, take a `LinkedList` implementation in Java. Linked lists are data structures that can store *many different types of values*. For example, look at the following in *Java*:
-
-<table>
-<tr><th width="520">Java</th></tr>
-<tr>
-<td>
-
-```java
-// Create a linked list that stores strings.
-LinkedList<String> myStringList = new LinkedList<>();
-// Create a linked list that stores students.
-LinkedList<Student> myRoster = new LinkedList<>(); 
-```
-
-</td>
-</tr>
-</table>
-
-The above Java syntax likely looks vaguely familiar! Here, we are creating two linked lists - one of `String` objects and the other of `Student` objects. We pass the data type of the object we want to store into the `< >` part of the type annotation.
-
-**TypeScript also supports generic types!** This is a feature that will be used a lot throughout this course. First, let's compare the syntax for creating the hypothetical lists shown above:
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-// Create a linked list that stores strings.
-LinkedList<String> myStringList = new LinkedList<>();
-// Create a linked list that stores students.
-LinkedList<Student> myRoster = new LinkedList<>(); 
-```
-
-</td>
- <td>
-  
-```ts
-// Create a linked list that stores strings.
-let myStringList: LinkedList<string> = new LinkedList<>();
-// Create a linked list that stores students.
-let myRoster: LinkedList<Student> = new LinkedList<>(); 
-```
-
-</td>
-</tr>
-</table>
-
-As you can see, the only thing different between both code snippets are how we declare the variable! The usage of `< >` remains the same.
-
-Now, how would we actually *implement* the `LinkedList<T>` class? Let's compare two rudimentary implmentations in both Java and TypeScript:
-
-<table>
-<tr><th width="520">Java</th><th width="520">TypeScript</th></tr>
-<tr>
-<td>
- 
-```java
-/** Represents a linked list node. */
-public class LinkedList<T> {
-
- /** Value for the node. */
- private T value;
- /** Next node, if it exists. */
- private LinkedList<T> next;
-
- /** Constructor */
- public LinkedList(T value) {
-  this.value = value;
- }
-
- /** Returns the value of the node. */
- public T getValue() {
-  return this.value;
- }
-
-/* Modifies the value of the node. */
- public void setValue(T value) {
-  this.value = value;
- }
-
- /* Other methods not shown */
-}
-```
-
-</td>
- <td>
-  
-```ts
-/** Represents a linked list node. */
-public class LinkedList<T> {
-
- /** Value for the node. */
- private value: T;
- /** Next node, if it exists. */
- private next: LinkedList<T>;
-
- /** Constructor */
- constructor(value: T) {
-  this.value = value;
- }
-
- /** Returns the value of the node. */
- public getValue(): T {
-  return this.value;
- }
-
-/* Modifies the value of the node. */
- public setValue(value: T) {
-  this.value = value;
- }
-
- /* Other methods not shown */
-}
-```
-
-</td>
-</tr>
-</table>
-
-In the header of the class, we put `<T>`, which specifies that we are adding a *type parameter*! Whenever this is then provided, like in `LinkedList<string>` or `LinkedList<Student>`, the `T` used throughout the class is then replaced by the type that is provided! So in the `LinkedList<string>` example, the field `value` becomes of type `string`. In the `LinkedList<Student>` example, the field `value` becomes of type `Student`.
-
-If this concept is unfamiliar, we highly recommend to practice using generic types in classes, as well as experimenting on your own! Generic types are an invaluable tool to make code extendable to multiple use-cases, and is used in many of the packages we are going to use throughout the course.
 
 ## Conclusion
 
-Congratulations! 🎉 TypeScript is an extremely powerful and useful language, and we you will have the chance to work with TypeScript code this entire semester. If you are having trouble remembering TypeScript syntax, feel free to return to this document at any time. In addition, for practice, we highly recommend you go to the official [TypeScript playground](https://www.typescriptlang.org) or open a new [Repl.it](https://replit.com) ! The TypeScript playground, as well as opening a `.ts` TypeScript file in [Visual Studio Code](https://code.visualstudio.com) and playing around with it, are some of the best ways to get more familiar and accustomed to using the language. As you have seen throughout your computer science careers so far, sometimes the best way to learn is to dive right in!
-
-In addition, below are some additional resources that you may find useful as your work through learning TypeScript.
-
-## Extra Resources
-
-* [Official TypeScript Cheat Sheets](https://www.typescriptlang.org/cheatsheets)
-* [Official Docs - TypeScript for the Java Programmer](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html)
-
-
+Congratulations! 🎉 Java is an extremely useful, industry-grade language - and you will have the chance to work with Java code throughout the entire class! If you are having trouble remembering Java syntax, feel free to return to this document at any time. As you have seen throughout your computer science careers so far, sometimes the best way to learn is to dive right in! So, if you want to practice Java, I highly recommend creating a new class in the Java 210 workspace and trying it out!
