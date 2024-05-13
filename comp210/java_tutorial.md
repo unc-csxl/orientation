@@ -312,12 +312,111 @@ name.indexOf("Ajay"); // Returns -1.
 
 There are many other string methods, but these are the most common ones! To see a more complete list, check out [this link](https://www.w3schools.com/java/java_ref_string.asp).
 
+### Conditionals
 
+Python and Java differ slightly in how we create *conditional statements* and *if-statements*.
 
+Java has the same boolean operators, however they are written differently between languages.
 
+<table>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
+<tr>
+<td>
+ 
+```py
+a and b
+a or b
+not a
+a == b
+```
 
+</td>
+ <td>
+  
+```java
+a && b // and
+a || b // or
+!a     // not
+a == b // equals
+```
 
+</td>
+</tr>
+</table>
 
+In Python, we represent truth values as `True` and `False`. In Java, these are lowercased as `true` and `false`.
+
+Additionally, following in the C-family heritage, Java has a feature called short-circuit evaluation, which is used by the `&&` and `||` operators. If the left-hand expression of an `&&` operator is `false`, the right-hand expression will not be evaluated. Conversely, if the left-hand expression of an `||` operator is `true`, then the right-hand expression will not be evaluated.
+
+Here is the syntax for **if-statements**:
+
+<table>
+<tr><th width="520">Python</th><th width="520">Java</th></tr>
+<tr>
+<td>
+ 
+```py
+if a and b:
+  # Runs if a == True and b == True 
+elif a:
+  # Runs if A == True
+else:
+  # Runs if A == False 
+```
+
+</td>
+ <td>
+  
+```java
+if (a && b) {
+  // Runs if a == true and b == true 
+}
+else if (a) {
+  // Runs if a == true
+}
+else {
+  // Runs if A == false 
+}
+```
+
+</td>
+</tr>
+</table>
+
+Notice that the use of `{ }` rather than `:` applies to control flow structures such as if statements (and loops). Also, **parenthesis are required around the conditional statements** in Java.
+
+There is no combined `elif` keyword in Java like there is in Python. Instead, we have to use `else if`.
+
+### While Loops
+
+#### The `while` Loop
+
+Just like with if-statements, both Python and Java have the same differences for while-loops! We use parenthesis around the conditional in loops too.
+
+<table>
+<tr><th width="520">Python</th><th width="520">Kava</th></tr>
+<tr>
+<td>
+ 
+```java
+while condition_a:
+ # Some code here!
+```
+
+</td>
+ <td>
+  
+```java
+while (conditionA) {
+ // Some code here!
+}
+```
+
+</td>
+</tr>
+</table>
+
+### For Loops
 
 
 
