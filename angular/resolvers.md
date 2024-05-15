@@ -4,9 +4,9 @@
 
 ## Preface
 
-Throughout COMP 423 so far, you have learned about subscribing to `Observable`s to load the data results from your API calls. Your Angular Service functions are responsible to calling the APIs you expose in your backend - and these service functions return `Observable` objects. Then, your Components can *subscribe* to these `Observable`s to access the actual data they hold.
+Throughout COMP 423 so far, you have learned about subscribing to `Observable`s to load the data results from your API calls. Your Angular Service functions are responsible for calling the APIs you expose in your backend - and these service functions return `Observable` objects. Then, your Components can *subscribe* to these `Observable`s to access the actual data they hold.
 
-Imagine that we are trying to load the list of all CSXL organizations into the `OrganizationPageComponent`. To do this, we would first need to call on on the `OrganizationService` Angular service class - specifically the `.getOrganizations()` method.
+Imagine that we are trying to load the list of all CSXL organizations into the `OrganizationPageComponent`. To do this, we would first need to call on the `OrganizationService` Angular service class - specifically the `.getOrganizations()` method.
 
 Recall that your service functions return _observables_. If we examine the method signature of the `OrganizationService.getOrganizations()` method, it looks like the following:
 
@@ -55,7 +55,7 @@ export class OrganizationPageComponent {
 }
 ```
 
-You notice that in the code above, we have to _subscribe_ to `organization$`, the observable returned from the `.getOrganizations()` service function, in order to access our data. However in many cases, especially where you are reading data that is not updating constantly, where this manual tussle with `Observable`s and subscriptions does not seem to idiomatic.
+You notice that in the code above, we have to _subscribe_ to `organization$`, the observable returned from the `.getOrganizations()` service function, in order to access our data. However in many cases, especially where you are reading data that is not updating constantly, this manual tussle with `Observable`s and subscriptions does not seem to be idiomatic.
 
 What if there was a way to _pre-load_ this data so that we can access it immediatley without having to manage subscriptions?
 
@@ -69,7 +69,7 @@ In this lesson, you will learn how to create your own Angular Resolvers and add 
 
 By convention standards, Angular Resolvers exist in their own TypeScript files with the name `feature.resolver.ts` - often bundled together in the same folder of the feature you are working on. For example, all of the resolvers for the "organizations" feature are in the `organizations/` directory and in the file `organization.resolver.ts`.
 
-Once in your file, you can begin to add Resolvers! Resolvers defined by the `ResolveFn` class. The `ResolveFn` object is defined in Angular as the following:
+Once in your file, you can begin to add Resolvers! Resolvers are defined by the `ResolveFn` class. The `ResolveFn` object is defined in Angular as the following:
 
 ```ts
 export declare type ResolveFn<T> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => Observable<T> | Promise<T> | T;
@@ -183,9 +183,9 @@ So, in the component's *constructor*, let's load our pre-loaded data.
 }
 ```
 
-First, we use `route.snapshot.data` to retrieve the data object exposed by our route based on the data we retrieved from the Resolver! Then, we want to *cast* this data (using the `as` operator) to an object *matching the exact shape as what we provided in `resolve` in the `Route` field above!) So, we need to cast this to an object with a field named `organization` that takes in the data type we are expecting from our Resolver - a list of organizations!
+First, we use `route.snapshot.data` to retrieve the data object exposed by our route based on the data we retrieved from the Resolver! Then, we want to *cast* this data (using the `as` operator) to an object *matching the exact shape as what we provided in `resolve` in the `Route` field above! So, we need to cast this to an object with a field named `organization` that takes in the data type we are expecting from our Resolver - a list of organizations!
 
-From there, now the `data` constant is saved to an oject with a single field named `organization`, and this field has been **successfully populated** with the results of `OrganizationService.getOrganizations()` - *no observables or subscriptions needed!*
+From there, now the `data` constant is saved to an object with a single field named `organization`, and this field has been **successfully populated** with the results of `OrganizationService.getOrganizations()` - *no observables or subscriptions needed!*
 
 So lastly, in order to access our data, we can simply call `data.organization` and save it to a field of the Component!
 
