@@ -4,7 +4,7 @@
 
 ## Preface
 
-In the final project, you been creating and implementing rather complex logic in your Python services and APIs to fetch, modify, and delete data in your database! Of course, these operations can often in exceptions that must be ultimately sent over back to your frontend in the form of an HTTP response code.
+In the final project, you have been creating and implementing rather complex logic in your Python services and APIs to fetch, modify, and delete data in your database! Of course, these operations can often result in exceptions that must be ultimately sent back to your frontend in the form of an HTTP response code.
 
 When working on exercises and your final project, you have been implementing this logic throughout. Let's take a look at a relevant example. Below, you will see the backend service function and the API for **retrieving organizations** from the database using an ID.
 
@@ -105,7 +105,7 @@ def permission_exception_handler(request: Request, e: UserPermissionException):
 
 This is our first error-handling *middleware* function!
 
-You can see that this function is marked with the `@app.exception_handler(Exception)` decorator. Note that `app` is referring to the current `FastAPI` application. This decorator essentially makes it so that the function it is attached to *runs whenever an uncaught exception of the type specified is thrown*. For the example above, can conclude that, based on the decorator, that `permission_exception_handler()` will run whenever `UserPermissionException` is thrown!
+You can see that this function is marked with the `@app.exception_handler(Exception)` decorator. Note that `app` is referring to the current `FastAPI` application. This decorator essentially makes it so that the function it is attached to *runs whenever an uncaught exception of the type specified is thrown*. For the example above, we can conclude, based on the decorator, that `permission_exception_handler()` will run whenever `UserPermissionException` is thrown!
 
 Each of our *exception handler* middleware functions takes in two parameters: `request` which models the HTTP request made, and `e` which injects the specific uncaught error.
 
