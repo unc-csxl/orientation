@@ -169,7 +169,7 @@ String aziz = names.get(0);
 
 ```ts
 // Initialize
-let names: string[] = ["Aziz, "Andrew"]
+let names: string[] = ["Aziz", "Andrew"]
 // Add values
 names.push("Jordan");
 // Replace a value
@@ -533,7 +533,7 @@ public class Student {
  private address: string;
 
  /* Constructor */
- constructor(name: string, year: int, adr: string) {
+ constructor(name: string, year: number, adr: string) {
   this.name = name;
   this.year = year;
   this.address = adr;
@@ -661,7 +661,7 @@ let person: Person = {
 </tr>
 </table>
 
-In this example, we use JSON (JavaScript object notation) to *create an object of data* that contains the *same properties* that a `Person` objct should have. Suprisingly enough, due to TypeScript being a structural language, this ***is a valid way to instantiate an object, technically of type object, that can used anywhere an object of type `Person` is expected without explicitly implementing the `Person` interface!***
+In this example, we use JSON (JavaScript object notation) to *create an object of data* that contains the *same properties* that a `Person` objct should have. Surprisingly enough, due to TypeScript being a structural language, this ***is a valid way to instantiate an object, technically of type object, that can used anywhere an object of type `Person` is expected without explicitly implementing the `Person` interface!***
 
 This feature is often called "duck typing", thanks to the addage "if it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck." TypeScript and structural typing take it further: "if it's a goose that looks like a duck, then it's a duck." In programming, structural type checking like TypeScript's, relaxes the strictness of nominal typing like Java's, by embracing the idea that _if an object has all the same fields and methods needed as some other type_, then it's probably OK to treat it as that other type.
 
