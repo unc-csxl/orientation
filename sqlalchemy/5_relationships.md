@@ -9,7 +9,7 @@ Let's take the following example. Say that every UNC Computer Science organizati
 
 You have been told that, for the purposes of this ticket, you are to assume that each Organization has a single President unique to it, and that a user can be a President of at most one club. 
 
-Given this information, you assume that you need to work with two of your tables in the PostgreSQL database - the `organization` and `user` tables. You also know that these tables are defined by the `OrganizationEntity` and `UserEntity` entities respectively. These two entities are separate, so how would be make this connection? We are now looking to utilize the most powerful feature of _relational databases_ like PostgreSQL - support for _relationships_ between tables.
+Given this information, you assume that you need to work with two of your tables in the PostgreSQL database - the `organization` and `user` tables. You also know that these tables are defined by the `OrganizationEntity` and `UserEntity` entities respectively. These two entities are separate, so how would we make this connection? We are now looking to utilize the most powerful feature of _relational databases_ like PostgreSQL - support for _relationships_ between tables.
 
 ***Database relationships*** define the connections between tables in a database and allow for tables to reference other tables. In this case, we want organizations found in the `organizations` table to be able to *refer to / point to* users in the `user` table - specifically, the user that is its President.
 

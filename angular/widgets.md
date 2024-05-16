@@ -210,7 +210,7 @@ export class OrganizationCard {
 
 Now, in the `organization-card.widget.html` file, we can use the `{{organization}}` variable in the same way you would in the HTML for a component!
 
-How would be use this in a component? We can pass inputs in directly to the HTML, like so:
+How would we use this in a component? We can pass inputs in directly to the HTML, like so:
 
 ```html
 <organization-card [organization]="organization" />

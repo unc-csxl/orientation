@@ -68,7 +68,7 @@ In the *arrow function* example, you probably notice something rather interestin
  
 ```ts
 // General formula with type annotation:
-let name: name = value;
+let name: type = value;
 // General formula without type annotation
 // (where TypeScript infers the type):
 let name = value;
@@ -229,7 +229,7 @@ Calling such a function literal directly is possible, but rarely used in such a 
 ((num: number): void => { console.log(num); })(423)
 ```
 
-(When such a construct is useful is a bit beyond our concerns, but as a hint it is a clever tactic for avoiding introducing any identifiers into a scope, like globals, while still giving you an isolated scope of function execution. In other words, it's useful in scenarios where might want to define a function and call it exactly once without giving any susequent code the ability to call it again.)
+(When such a construct is useful is a bit beyond our concerns, but as a hint it is a clever tactic for avoiding introducing any identifiers into a scope, like globals, while still giving you an isolated scope of function execution. In other words, it's useful in scenarios where might want to define a function and call it exactly once without giving any subsequent code the ability to call it again.)
 
 In a sense, it's similarly as infrequent to use as directly subscripting a string, such as:
 
