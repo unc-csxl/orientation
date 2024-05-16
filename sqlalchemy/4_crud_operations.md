@@ -24,7 +24,7 @@ So, you may expect then, that `POST` APIs should call a function in the service 
 
 ## Transactions
 
-In order for us to perform CRUD operations on our database, we must understand how these operations are performed. SQLAlchemy performs these operations using something called **_transactions_**. The purpose of a transaction is to denote an all-or-nothing collection of changes to a database. All-or-nothing refers to the fact that either _all_ of the requested changes should happen to the database. If something happens that would cause any change to fail, then _none_ of the changes are performed. This is incredibly vital for the integrity of the database. It ensures that the database is always in a consistent state even if errors occur, such as if a database modification fails, connection is dropped, in the middle of a transaction.
+In order for us to perform CRUD operations on our database, we must understand how these operations are performed. SQLAlchemy performs these operations using something called **_transactions_**. The purpose of a transaction is to denote an all-or-nothing collection of changes to a database. All-or-nothing refers to the fact that _all_ of the requested changes should happen to the database. If something happens that would cause any change to fail, then _none_ of the changes are performed. This is incredibly vital for the integrity of the database. It ensures that the database is always in a consistent state even if errors occur, such as if a database modification fails, connection is dropped, in the middle of a transaction.
 
 Consider the example used in class - transferring money between two bank accounts. Say that Kris Jordan bought his coworker, KMP, lunch. KMP wants to pay Kris Jordan back for $10. The following operations would be performed:
 
@@ -148,7 +148,7 @@ class OrganizationService:
         return [entity.to_model() for entity in entities]
 ```
 
-Just like how we got _all_ of the data in our table, we can also get data from our table that matches a condition.
+Just like how we got _all_ of the data in our table. We can also get data from our table that matches a condition.
 
 For example, what if I wanted to get only the public organizations from my database.
 
@@ -237,7 +237,7 @@ def create(self, organization: Organization) -> Organization:
 
 Of course, if there is an error in the `.commit()` step, our transaction follows the _all-or-nothing_ principle that we discussed earlier.
 
-You may also notice the `return` statement at the bottom! We return the object that we created (in model form) to ensure that it has been created correctly. There are also some instances where if we did not populate certain fields, the returned value would have those fields populated. This may be due to the `default=` rules defined earlier in the entity.
+You may also notice the `return` statement at the bottom! We return the object that we created (in model form) for testing purposes to ensure that it has been created correctly. There are also some instances where if we did not populate certain fields, the returned value would have those fields populated. This may be due to the `default=` rules defined earlier in the entity.
 
 ## Delete Data
 
@@ -297,7 +297,7 @@ The `.where()` method can actually take in multiple conditions, and the conditio
 
 #### Creating an `OR` Query
 
-Creating an `OR` query requires a little bit more, specifically, knowledge of Python's `|` operator. This operator will allow us to join two query conditionals together and apply the `OR` rule to it. For example,
+Creating an `OR` query requires a little bit more, specifically, knowledge of SQLAlchemy's `|` operator. This operator will allow us to join two query conditionals together and apply the `OR` rule to it. For example,
 
 ```py
 entities = self._session.query(OrganizationEntity)
@@ -370,9 +370,9 @@ entities = self._session.query(EventEntity)
     .all()
 ```
 
-Notice that again, we the entity that we put into our `query()` method was the `EventEntity` because this is the type of data that we are expecting. The only real difference here is that we have _one extra `.join()` method call_. Since the `event` and `user` tables are related through the `event_registration` table, in order to ultimately join the `event` table to the `user` table, we have to go through the _association table_ (`event_registration`) first! Once we join with the association table, we can then join to the final table. From there, we can now apply a filter on the `user` table.
+Notice that again, the entity that we put into our `query()` method was the `EventEntity` because this is the type of data that we are expecting. The only real difference here is that we have _one extra `.join()` method call_. Since the `event` and `user` tables are related through the `event_registration` table, in order to ultimately join the `event` table to the `user` table, we have to go through the _association table_ (`event_registration`) first! Once we join with the association table, we can then join to the final table. From there, we can now apply a filter on the `user` table.
 
-So, the code snippet above will \*return all of the events whose attended by a user with the id `7308888888`.
+So, the code snippet above will \*return all of the events attended by a user with the id `7308888888`.
 
 ### Querying Paginated Data
 

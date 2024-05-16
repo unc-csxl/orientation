@@ -9,7 +9,7 @@ SQLAlchemy is a Python library whose functionality is broken up into two parts -
 
 ## SQLAlchemy Core
 
-The **SQLAlchemy Core** contains the base features for SQLAlchemy to serve as a _database toolkit_. First, the **Core** contains features features for SQLAlchemy to manage a constant connection with your database using the **SQLAlchemy Engine**. The _Engine_ uses important database information noted in your hidden `.env` secrets file to maintain a stable connection to the database. You will learn more about how to configure the engine and set up this connection to the database in [**Chapter 3: Connecting to the Database**](https://github.com/unc-csxl/csxl.unc.edu/blob/main/docs/sqlalchemy/3_connecting_to_database.md).
+The **SQLAlchemy Core** contains the base features for SQLAlchemy to serve as a _database toolkit_. First, the **Core** contains features for SQLAlchemy to manage a constant connection with your database using the **SQLAlchemy Engine**. The _Engine_ uses important database information noted in your hidden `.env` secrets file to maintain a stable connection to the database. You will learn more about how to configure the engine and set up this connection to the database in [**Chapter 3: Connecting to the Database**](https://github.com/unc-csxl/csxl.unc.edu/blob/main/docs/sqlalchemy/3_connecting_to_database.md).
 
 The _Core_ also contains all of the logic needed to run SQL queries on the database and retrieve results. You have the _Core_ to thank for not having to write plain SQL code throughout your web application's backend!
 
