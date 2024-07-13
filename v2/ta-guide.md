@@ -135,9 +135,9 @@ class OrganizationAdminComponent {
 </tr>
 </table>
 
-This solution worked, and despite its verbosity, was our preferred solution to solving such problems in our codebase whenever we needed our pages to dynamically update. However, as of the newest version of Angular, there is now a better built-in way that transforms how we define and interact with reactive objects. 
+This solution worked, and despite its verbosity, was our preferred solution to solving such problems in our codebase whenever we needed our pages to dynamically update. However, as of the newest version of Angular, there is now a better built-in way that transforms how we define and interact with reactive objects. This construction is called the Angular Signal.
 
-### In
+### Introduction to Angular Signals
 
 ## HTML Syntax Changes
 
