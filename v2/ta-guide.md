@@ -94,6 +94,51 @@ In `RxObject`, the `ReplaySubject` was essentially like the scoreboard that that
 `RxObject` was also an *abstract class* that had to be implemented differently depending on the type of value stored. For example, to solve the organization list problem, a [separate `RxOrganizationList` class](https://github.com/unc-csxl/csxl.unc.edu/blob/ff80dd5535d910d84639d036ac01115db7aed89c/frontend/src/app/organization/rx-organization.ts#L13-L32
 ) was created. This object would then encapsulate a value of type `Organization[]`.
 
+Our example from above can be rewritten using `RxOrganizationList`:
+<table>
+ <tr><th width="520">`OrganizationAdminComponent` - TS</th><th width="520">`OrganizationAdminComponent` - HTML</th></tr>
+<tr>
+<td>
+ 
+```ts
+@Component(...)
+class OrganizationAdminComponent {
+
+  // Store a reactive list of organizations
+  organizations: RxOrganizationList;
+
+  // ... (many items omitted)
+
+  deleteOrganization(slug: string) {
+    this.http.delete('/api/organizations/' + slug)
+      .subscribe((_) => {
+        this.organizations.removeOrganization(slug);
+      });
+  }
+}
+```
+
+</td>
+ <td>
+  
+```html
+<div>
+  <organization-card
+    *ngFor="let organization of
+      (organizations.value$ | async)"
+    [organization]="organization"
+  />
+</div>
+```
+
+</td>
+</tr>
+</table>
+
+This solution worked, and despite its verbosity, was our preferred solution to solving such problems in our codebase whenever we needed our pages to dynamically update. However, as of the newest version of Angular, there is now a better built-in way that transforms how we define and interact with reactive objects. 
+
+### In
+
 ## HTML Syntax Changes
 
 
