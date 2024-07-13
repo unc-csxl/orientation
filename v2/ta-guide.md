@@ -3,7 +3,7 @@
 > Written by Ajay Gandecha for the CSXL Web Application and for COMP 423: Foundations of Software Engineering.<br>
 > *Last Updated: 7/13/2024*
 
-👋 Hey, Ajay here - I hope you had a teriffic summer! A significant amount has changed in XL site since LDOC (full changelog 👀: [`v1.7.0...v1.10.5`](https://github.com/unc-csxl/csxl.unc.edu/compare/v1.7.0...v1.10.5)). In the time since May, the CSXL repo has gone through many changes:
+👋 Hey, Ajay here - I hope you had a terrific summer! A lot has changed in XL site since LDOC (full changelog 👀: [`v1.7.0...v1.10.5`](https://github.com/unc-csxl/csxl.unc.edu/compare/v1.7.0...v1.10.5)). In the time since May, the CSXL repo has gone through many changes:
 * Upgrade to the latest Angular version with many new features and conventions
 * Upgrade from Material 2 to the new Material 3 design system, standard to the most modern Android OS release.
 * Many new features and refactors to existing features, including:
