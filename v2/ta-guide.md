@@ -135,9 +135,133 @@ class OrganizationAdminComponent {
 </tr>
 </table>
 
-This solution worked, and despite its verbosity, was our preferred solution to solving such problems in our codebase whenever we needed our pages to dynamically update. However, as of the newest version of Angular, there is now a better built-in way that transforms how we define and interact with reactive objects. This construction is called the Angular Signal.
+This solution worked, and despite its verbosity, was our preferred solution for creating reactive objects in our codebase whenever we needed our pages to dynamically update. However, as of the newest version of Angular, there is now a better built-in way that transforms how we define and interact with reactive objects. This construction is called the Angular Signal.
 
 ### Introduction to Angular Signals
+
+**Angular Signals** are the new easy, preferred way to create reactive objects. They are super easy to set up and to use in both components and services. Signals wrap around a value and notifies consumers (the UI) when that value changes. Signals can also contain any value, eliminating the need to create implementing subclasses (like we had to do with `RxObject`). Signals may be either writable (`WritableSignal` or read-only `Signal`).
+
+Creating a signal is easy. We use the built-in `signal()` wrapper and specify an initial value. We can change the value of a writable signal later using the `.set()` method. Signals also have a `.update()` method which allows us to mutuate its value in a closure.
+
+<table>
+ <tr><th width="520">Creating a Signal</th></tr>
+<tr>
+<td>
+ 
+```ts
+// Creates a signal with an initial value of 3
+myReactiveNumber: WritableSignal<number> = signal(3);
+// Sets the signal (notifying all consumers)
+myReactiveNumber.set(8);
+// Mutates the signal's value (notifying all consumers)
+myReactiveNumber.update(value => value + 1);
+```
+ 
+</td>
+</tr>
+</table>
+
+Signals also have a built-in getter method which makes it extremely easy to unwrap and access its value underneath. For this, we simply call our signal like a function:
+
+<table>
+ <tr><th width="520">Reading From a Signal</th></tr>
+<tr>
+<td>
+ 
+```ts
+// Creates a signal with an initial value of 3
+myReactiveText: WritableSignal<string> = signal("Hello, world!");
+// Read the value from the signal
+myReactiveText();
+
+```
+ 
+</td>
+</tr>
+</table>
+
+With all of this, signals would make our organizations admin feature extremely easy to set up. Here it is in action:
+
+<table>
+ <tr><th width="520">`OrganizationAdminComponent` - TS</th><th width="520">`OrganizationAdminComponent` - HTML</th></tr>
+<tr>
+<td>
+ 
+```ts
+@Component(...)
+class OrganizationAdminComponent {
+
+  // Store the list of organizations
+  organizations: WritableSignal<Organization[]> = signal([]);
+
+  // Constructor (Sets the initial organizations value)
+  constructor( ... ) {
+    this.http.get<Organization[]>('/api/organizations')
+      .subscribe((orgs) => {
+        this.organizations.set(orgs);
+      });
+  }
+
+  // ... (many items omitted)
+
+  // Deletes an organization
+  deleteOrganization(slug: string) {
+    this.http.delete('/api/organizations/' + slug)
+      .subscribe((newOrgList) => {
+        this.organizations.update((orgs) =>
+            orgs.filter((o) => o.slug != slug)
+        );
+      });
+  }
+}
+```
+
+</td>
+ <td>
+  
+```html
+<div>
+  <organization-card
+    *ngFor="let organization
+      of organizations()"
+    [organization]="organization"
+  />
+</div>
+```
+
+</td>
+</tr>
+</table>
+
+**Signals can also be placed in services** where having a consistent, single source of truth about the state of data across components is preferred. In the real refactor for the Organizations feature, the signal that stores the list of organizations is placed inside of the service. There are a few benefits of this:
+
+* Service CRUD methods can mutate the signal's value on its own, preventing messy component code.
+* Widgets on the admin page are also able to easily access the most up-to-date organizations list.
+* The organization data is shared between the regular organization page and the admin page.
+* The API no longer has to query every time the regular organizations page loads (it can just use the value in the signal).
+* If two tabs are open on your computer, one with the admin page and the other with the regular organization page, modifying an organization as an admin will automatically update the data on the main page without having to refresh.
+
+To promote a good separation of concerns and encapsulation, it is recommended that public signal properties of services are accessible as ***read-only*** by components. Components should call service methods that mutate a signal's value, not change it directly. This has been done [here](https://github.com/unc-csxl/csxl.unc.edu/blob/82885ede514faec99c2a93df34c15c3a1dd3336c/frontend/src/app/organization/organization.service.ts#L23-L25):
+
+<table>
+ <tr><th width="520">Signals in Services</th></tr>
+<tr>
+<td>
+ 
+```ts
+export class OrganizationService {
+  /** Organizations signal */
+  private organizationsSignal: WritableSignal<Organization[]> = signal([]);
+  organizations = this.organizationsSignal.asReadonly();
+
+  // ...
+}
+```
+</td>
+</tr>
+</table>
+
+The `organizationsSignal` signal is writable and is scoped only to the service. The public `organizations` signal is read only.
 
 ## HTML Syntax Changes
 
