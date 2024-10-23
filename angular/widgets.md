@@ -29,18 +29,20 @@ Say we wanted to look at the HTML structure of the organization page. You would 
 
   <!-- Organizations -->
   <div class="organization-grid">
-    <mat-card class="organization-card" *ngFor="let organization of organizations">
-      <!-- HIDDEN: Organization Header Section not shown -->
-      <!-- HIDDEN: Organization Description Section not shown -->
-      <!-- Social Media Icons -->
-      <!-- Email -->
-      <a href={{href}} target="_blank">
-          <button mat-icon-button color="basic">
-            <mat-icon fontIcon="email" svgIcon="email"></mat-icon>
-          </button>
-      </a>
-      <!-- HIDDEN: Instagram, Link, LinkedIn Icons not shown -->
-    </mat-card>
+    @for(organization of organizations; track organization.id) {
+      <mat-card class="organization-card">
+        <!-- HIDDEN: Organization Header Section not shown -->
+        <!-- HIDDEN: Organization Description Section not shown -->
+        <!-- Social Media Icons -->
+        <!-- Email -->
+        <a href={{href}} target="_blank">
+            <button mat-icon-button color="basic">
+              <mat-icon fontIcon="email" svgIcon="email"></mat-icon>
+            </button>
+        </a>
+        <!-- HIDDEN: Instagram, Link, LinkedIn Icons not shown -->
+      </mat-card>
+    }
   </div>
 </div>
 ```
@@ -62,14 +64,16 @@ We can convert commonly-shared elements into widgets and *abstract them out* of 
 
   <!-- Organizations -->
   <div class="organization-grid">
-    <mat-card class="organization-card" *ngFor="let organization of organizations">
-      <!-- HIDDEN: Organization Header Section not shown -->
-      <!-- HIDDEN: Organization Description Section not shown -->
-      <!-- Social Media Icons -->
-      <!-- Email -->
-      <social-media-icon icon="email">
-      <!-- HIDDEN: Instagram, Link, LinkedIn Icons not shown -->
-    </mat-card>
+    @for(organization of organizations; track organization.id) {
+      <mat-card class="organization-card">
+        <!-- HIDDEN: Organization Header Section not shown -->
+        <!-- HIDDEN: Organization Description Section not shown -->
+        <!-- Social Media Icons -->
+        <!-- Email -->
+        <social-media-icon icon="email">
+        <!-- HIDDEN: Instagram, Link, LinkedIn Icons not shown -->
+      </mat-card>
+    }
   </div>
 </div>
 ```
@@ -85,7 +89,9 @@ We can even create a widget called `<organization-card>` that abstracts out the 
 
   <!-- Organizations -->
   <div class="organization-grid">
-    <organization-card *ngFor="let organization of organizations" [organization]="organization" />
+    @for(organization of organizations; track organization.id) {
+      <organization-card [organization]="organization" />
+    }
   </div>
 </div>
 ```
@@ -217,10 +223,12 @@ How would we use this in a component? We can pass inputs in directly to the HTML
 
 **Note that the `[ ]` syntax denotes an INPUT in Angular!**
 
-We can also expand this and combine it with `*ngFor`, assuming `organizations` is a list of `Organization`s:
+We can also expand this and combine it with `@for`, assuming `organizations` is a list of `Organization`s:
 
 ```html
-<organization-card [organization]="organization" *ngFor="let organization of organizations" />
+@for(organization of organizations; track organization.id) {
+  <organization-card [organization]="organization" />
+}
 ```
 
 This is the exact implementation used for the organization page! See for yourself in the `organization-page.component.html` file.
@@ -277,21 +285,23 @@ Before we do that step, let's look at what this would look like in the component
 
 **organization-page.component.html**
 ```html
+@for(organization of organizations; track organization.id) {
 <organization-card
   [organization]="organization"
   (joinButtonPressed)="/* SOMETHING HERE */"
-  *ngFor="let organization of organizations"
   />
+}
 ```
 
 We can see that we now have access to this `(joinButtonPressed)` output! Looks like `<button>`'s `(click)`, right? You would probably want to put the component's `joinOrganization(org: Organization)` in here now, which is the correct idea!
 
 ```html
-<organization-card
-  [organization]="organization"
-  (joinButtonPressed)="joinOrganization(org: /* What goes here??? */)"
-  *ngFor="let organization of organizations"
+@for(organization of organizations; track organization.id) {
+  <organization-card
+    [organization]="organization"
+    (joinButtonPressed)="joinOrganization(org: /* What goes here??? */)"
   />
+}
 ```
 
 But, what would our organization input be?
@@ -314,11 +324,12 @@ In our main component, we can now access this emitted variable using `$event`, l
 
 **organization-page.component.html**
 ```html
-<organization-card
-  [organization]="organization"
-  (joinButtonPressed)="joinOrganiation($event)"
-  *ngFor="let organization of organizations"
+@for(organization of organizations; track organization.id) {
+  <organization-card
+    [organization]="organization"
+    (joinButtonPressed)="joinOrganiation($event)"
   />
+}
 ```
 
 This is perfect! Now, when the button in the *widget* is pressed, it *emits* the organization out of the widget into this variable called `$event`, which is then used as the parameter for `joinOrganization` in the component! We just sent data from our widget to the component that contains it.
