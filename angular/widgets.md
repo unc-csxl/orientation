@@ -10,8 +10,7 @@ If you have begun to explore the frontend of the CSXL web application, you may h
 In Angular, **widgets are *individual*, *resuable* user interface elements that can be easily integrated into the UI of your Angular components!** Widgets essentially abstract frontend UI elements to simplify Angular compponents, enhance user experience, and make the development process in Angular less painful.
 
 Take the following example:
-![organization page](https://github.com/unc-csxl/orientation/blob/main/images/org-page.png)
-
+![organization page](https://private-user-images.githubusercontent.com/17516747/353241306-ebd36fa6-522d-4029-a70c-0a99a622b50f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjk2NDgzMTUsIm5iZiI6MTcyOTY0ODAxNSwicGF0aCI6Ii8xNzUxNjc0Ny8zNTMyNDEzMDYtZWJkMzZmYTYtNTIyZC00MDI5LWE3MGMtMGE5OWE2MjJiNTBmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMjMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDIzVDAxNDY1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTNlODRlYzRhYmE1Y2NlZjY1MTVkN2I4MjBjODk2OWVjMTZjNzA3ODBjOTI5ZDA5ZjIyNDk0MjI2OWVmNGZmMDQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.TMMRc8HH3E-flpMBTRAjRBXbLC0DF_EKisAfgL2aaiE)
 Above is the *Organization component* of the CSXL site ([view live here](https://csxl.unc.edu/organizations)). As you can see, the page contains a lot of elements - namely a *search bar* and also individual *organization cards* that display relevant information about CS Department-affiliated student organizations.
 
 Say we wanted to look at the HTML structure of the organization page. You would likely expect it to look something like the sample code below:
